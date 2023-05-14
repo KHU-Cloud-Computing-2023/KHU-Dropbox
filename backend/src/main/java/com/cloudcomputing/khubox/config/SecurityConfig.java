@@ -8,13 +8,28 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig{
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().
-				authorizeHttpRequests().requestMatchers("/**").permitAll()
-				.anyRequest().authenticated();
+		http.csrf().disable()
+				.authorizeHttpRequests()
+				.requestMatchers("/files/**").authenticated()
+				.requestMatchers("/admin/**").hasRole("ADMIN")
+				.requestMatchers("/auth/**").permitAll()
+				.anyRequest().permitAll()
+				.and()
+				.formLogin()
+				.loginPage("/auth/login")
+				.loginProcessingUrl("/login")
+				.defaultSuccessUrl("/")
+				.and()
+				.logout()
+				.logoutUrl("/auth/logout")
+				.logoutSuccessUrl("/")
+				.deleteCookies("JSESSIONID")
+				.invalidateHttpSession(true);
 		return http.build();
 	}
+
 }
