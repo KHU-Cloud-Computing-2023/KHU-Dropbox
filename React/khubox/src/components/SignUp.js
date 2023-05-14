@@ -148,7 +148,7 @@ function SignUp(){
           type="submit"
           disabled={Object.keys(errors).length > 0 || !watch()}
           onClick={handleSubmit(onSubmit)}
-          class="signup"
+          class="click"
           >Submit</button>
       </form>
     </div>
