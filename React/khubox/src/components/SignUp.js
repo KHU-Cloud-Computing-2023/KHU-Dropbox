@@ -40,10 +40,18 @@ function SignUp(){
     email : yup
     .string()
     .required('이메일을 입력해주세요.')
-    .email('이메일 형식이 아닙니다.'),
+    .email('올바른 형식으로 다시 입력해주세요.'),
+    // .matches(
+    //   /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
+    //   '올바른 형식으로 다시 입력해주세요.'
+    // ),
     mobile : yup
     .string()
-    .required('핸드폰 번호를 입력해주세요.'),
+    .required('010-xxxx-xxxx 형식으로 번호를 입력해주세요.')
+    .matches(
+      /^[0-9]{3}[-]+[0-9]{4}[-]+[0-9]{4}$/,
+      '올바른 형식으로 다시 입력해주세요.'
+      ),
     // .mobile('형식이 다릅니다.')
   })
   
@@ -69,6 +77,7 @@ function SignUp(){
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
+      // 추후 api통신을 통해 아이디 중복 검사 로직 추가 예정
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -108,6 +117,7 @@ function SignUp(){
           class="form"
           placeholder="Name" {...register('name')}
         />
+        {errors.name && <p>{errors.name.message}</p>}
         <input
           type="text"
           name="work"
@@ -126,12 +136,14 @@ function SignUp(){
         class="form"
         placeholder="Email" {...register('email')}
         />
+        {errors.email && <p>{errors.email.message}</p>}
         <input
           type="text"
           name="mobile"
           class="form"
           placeholder="Mobile" {...register('mobile')}
         />
+        {errors.mobile && <p>{errors.mobile.message}</p>}
         <button
           type="submit"
           disabled={Object.keys(errors).length > 0 || !watch()}
