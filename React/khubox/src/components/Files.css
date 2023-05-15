@@ -1,0 +1,31 @@
+/* .filePage {
+    display: ;
+} */
+* {
+    font-size: 20px;
+}
+
+.fileTitle {
+    width: 60%;
+    margin: 9rem 19rem 0;
+}
+
+.fileTitle>h1 {
+    font-size: 40px;
+}
+
+.fileTitle>p {
+    font-size: 24px;
+}
+
+.table {
+    width: 60%;
+    margin: 0 20rem;
+}
+
+th,
+td {
+    height: 4.5rem;
+    text-align: center;
+    vertical-align: middle;
+}

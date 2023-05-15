@@ -1,0 +1,64 @@
+.bd-sidebar {
+    position: fixed;
+    top: 7rem;
+    left: 3rem;
+    z-index: 1000;
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    min-width: 200px;
+    /* max-width: 220px; */
+}
+
+.bd-sidebar .nav {
+    display: block;
+    margin-top: 1rem;
+}
+
+.bd-sidebar .nav>li>a {
+    display: block;
+    padding: .75rem 1.5rem;
+    font-size: 25px;
+    font-weight: 500;
+    color: #4D37A5;
+}
+
+.bd-sidebar .nav>li>button {
+    display: block;
+    margin-top: .5rem;
+    padding: .75rem 3rem;
+    font-size: 22px;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: #fff;
+}
+
+.navbar-brand {
+    color: #4D37A5;
+    font-size: 50px;
+    font-weight: 900;
+    padding-left: 3rem;
+}
+
+.btn-success {
+    background-color: #AF9CFB;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+}
+
+.btn-success:hover {
+    background-color: #4D37A5;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    border: none;
+}
