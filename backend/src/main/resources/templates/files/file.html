@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>TEST</title>
 </head>
 <body>
+<a href="/files/upload">Upload</a>
+
+<ul>
+    <li th:each="fileKey : ${fileKeys}">
+        <span th:text="${fileKey}"></span>
+        <a th:href="@{/files/download(fileKey=${fileKey})}">Download</a>
+        <a th:href="@{/files/update(fileKey=${fileKey})}">Update</a>
+    </li>
+</ul>
 
 </body>
 </html>

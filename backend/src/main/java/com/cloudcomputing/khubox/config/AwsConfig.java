@@ -22,7 +22,19 @@ public class AwsConfig {
 //				.withRegion(awsRegion)
 //				.withCredentials(new DefaultAWSCredentialsProviderChain())
 //				.build();
-//	}
 
+
+	@Value("${aws.s3.region}")
+	private String region;
+
+	@Bean
+	public AmazonS3 setS3Client() {
+		AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+
+		return AmazonS3ClientBuilder.standard()
+				.withCredentials(new AWSStaticCredentialsProvider(credentials))
+				.withRegion(region)
+				.build();
+	}
 
 }
