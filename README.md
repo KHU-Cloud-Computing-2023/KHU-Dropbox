@@ -14,3 +14,9 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.username 항목과 spring.datasource.password 항목에 MySQL 계정 정보
 
 2. MySQL 실행
+
+## 추가
+
+3. S3 퍼블릿 버킷으로 생성 및 Access Point 생성
+
+해당 정보를 application.property 에 작성
