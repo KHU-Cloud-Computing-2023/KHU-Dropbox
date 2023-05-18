@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class AuthService {
 
+	private final FileService fileService;
+
 	private final MemberRepository memberRepository;
 
 	@Autowired
@@ -30,6 +32,7 @@ public class AuthService {
 	public Member createMember(Member member) {
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		memberRepository.save(member);
+		fileService.makeBucketDirectory(member.getLoginId());
 		return member;
 	}
 }

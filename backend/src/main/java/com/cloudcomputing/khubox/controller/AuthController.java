@@ -51,32 +51,32 @@ public class AuthController {
 	AuthConfig authConfig;
 
 
-	@Value("${spring.cognito.login}")
-	private String CognitoLogin;
+//	@Value("${spring.cognito.login}")
+//	private String CognitoLogin;
+//
+//	@Value("${spring.cognito.logout}")
+//	private String CognitoLogout;
+//
+//	@Value("${spring.cognito.signup}")
+//	private String CognitoSignup;
+//
+//	@Value("${spring.security.oauth2.client.registration.cognito.poolId}")
+//	private String PoolId;
 
-	@Value("${spring.cognito.logout}")
-	private String CognitoLogout;
-
-	@Value("${spring.cognito.signup}")
-	private String CognitoSignup;
-
-	@Value("${spring.security.oauth2.client.registration.cognito.poolId}")
-	private String PoolId;
-
-	@GetMapping("/cog_signup")
-	public String signupCog() {
-		return "redirect:" + CognitoSignup;
-	}
+//	@GetMapping("/cog_signup")
+//	public String signupCog() {
+//		return "redirect:" + CognitoSignup;
+//	}
 
 	@GetMapping("/signup")
 	public String signupForm() {
 		return "auth/signup";
 	}
 
-	@GetMapping("/cog_login")
-	public String loginCog() {
-		return "redirect:" + CognitoLogin;
-	}
+//	@GetMapping("/cog_login")
+//	public String loginCog() {
+//		return "redirect:" + CognitoLogin;
+//	}
 
 	@GetMapping("/callback")
 	public String callback(@RequestParam("code") String code, HttpServletRequest request) {
@@ -148,16 +148,16 @@ public class AuthController {
 		return "auth/login";
 	}
 
-	@GetMapping("/cog_logout")
-	public String logout(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-
-		if (session != null) {
-			session.invalidate();
-		}
-		SecurityContextHolder.clearContext();
-		return "redirect:/" + CognitoLogout;
-	}
+//	@GetMapping("/cog_logout")
+//	public String logout(HttpServletRequest request) {
+//		HttpSession session = request.getSession(false);
+//
+//		if (session != null) {
+//			session.invalidate();
+//		}
+//		SecurityContextHolder.clearContext();
+//		return "redirect:/" + CognitoLogout;
+//	}
 
 	@PostMapping("/signup")
 	public String signup(@ModelAttribute Member member) {
@@ -180,8 +180,9 @@ public class AuthController {
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(loginMember, null, null));
 		request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
 
+		request.getSession().setAttribute("id", loginMember.getLoginId());
 
-		return "redirect:/";
+		return "redirect:/files/file";
 	}
 
 }

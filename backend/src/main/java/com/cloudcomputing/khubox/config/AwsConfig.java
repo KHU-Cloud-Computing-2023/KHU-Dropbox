@@ -1,8 +1,10 @@
 package com.cloudcomputing.khubox.config;
 
-import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.auth.*;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProvider;
 import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClientBuilder;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +24,7 @@ public class AwsConfig {
 //				.withRegion(awsRegion)
 //				.withCredentials(new DefaultAWSCredentialsProviderChain())
 //				.build();
+//	}
 
 
 	@Value("${aws.s3.region}")
@@ -29,10 +32,10 @@ public class AwsConfig {
 
 	@Bean
 	public AmazonS3 setS3Client() {
-		AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+		AWSCredentialsProvider credentialsProvider = new DefaultAWSCredentialsProviderChain();
 
 		return AmazonS3ClientBuilder.standard()
-				.withCredentials(new AWSStaticCredentialsProvider(credentials))
+				.withCredentials(credentialsProvider)
 				.withRegion(region)
 				.build();
 	}
