@@ -22,13 +22,33 @@ function LogIn() {
         e.preventDefault();
         console.log(id, password);
         try {
-            const response = await fetch('/api/login', {
+            if (id === "")
+            {
+                return alert("ID를 입력해주세요");
+            }
+            else if (password === "")
+            {
+                return alert("Password를 입력해주세요");
+            }
+            const response = await fetch('/login', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({id, password})
             });
             if (response.ok) {
-                nevigate('/'); // 이동할 페이지 수정해야함
+                nevigate('/home'); // 이동할 페이지 수정해야함
+            }
+            else if (response.status === 400)
+            {
+                return alert("ID, Password가 비어있습니다.");
+            }
+            else if (response.status === 401)
+            {
+                return alert("존재하지 않는 ID입니다.");
+            }
+            else if (response.status === 402)
+            {
+                return alert("Password가 틀립니다.");
             }
             else {
                 console.log('로그인 실패');
