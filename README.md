@@ -17,6 +17,6 @@ spring.datasource.username 항목과 spring.datasource.password 항목에 MySQL 
 
 ## 추가
 
-3. S3 퍼블릿 버킷으로 생성 및 Access Point 생성
+3. S3 퍼블릿 버킷으로 생성 및 Access Point 생성 (EMR_EC2_DefaultRole)
 
 해당 정보를 application.property 에 작성
