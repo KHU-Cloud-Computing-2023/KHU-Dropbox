@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 
 function LogIn() {
-    const nevigate = useNavigate();
+    const navigate = useNavigate();
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
 
@@ -36,7 +36,7 @@ function LogIn() {
                 body: JSON.stringify({id, password})
             });
             if (response.ok) {
-                nevigate('/home'); // 이동할 페이지 수정해야함
+                navigate('/home'); // 이동할 페이지 수정해야함
             }
             else if (response.status === 400)
             {
@@ -61,7 +61,7 @@ function LogIn() {
 
     const handleSignupClick = () => {
         // 회원가입 페이지로 이동
-        nevigate('/signup');
+        navigate('/signup');
     }
 
     return (

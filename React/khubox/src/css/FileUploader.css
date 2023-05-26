@@ -1,0 +1,14 @@
+.file-uploader {
+    width: 300px;
+    height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .file-uploader p {
+    margin: 0;
+  }
