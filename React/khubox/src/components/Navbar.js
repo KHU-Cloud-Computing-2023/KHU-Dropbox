@@ -1,10 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import React, { useState } from 'react';
 import "../css/Navbar.css";
 import { BsPersonCircle } from "react-icons/bs";
-
+import FileUploader from "./FileUploader";
 
 function Sidebar() {
+    const [showUploader, setShowUploader] = useState(false);
+
+    const handleButtonClick = () => {
+        setShowUploader(!showUploader);
+    };
+
     return (
         // <div class="container-fluid">
         // <div class="row flex-nowrap">
@@ -17,7 +23,11 @@ function Sidebar() {
                 <li><a href="#!">User Activity</a></li>
                 <li><a href="#!">Trash</a></li>
                 <li>
-                    <button class="btn btn-success upload" type="submit">
+                    {showUploader && <FileUploader />}
+                    <button
+                        class="btn btn-success upload"
+                        type="submit"
+                        onClick={handleButtonClick}>
                         Upload Files
                     </button>
                 </li>
@@ -29,6 +39,7 @@ function Sidebar() {
     );
 }
 function Topbar() {
+
     return (
         <div>
             <nav class="navbar navbar-expand-lg ">
@@ -36,7 +47,12 @@ function Topbar() {
                     <a class="navbar-brand" href="#!">KHUBox</a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <form class="d-flex ms-auto p-2">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <input
+                                class="form-control me-2"
+                                type="search"
+                                placeholder="Search"
+                                aria-label="Search"
+                                />
                             <button class="btn btn-success" type="submit">Search</button>
                         </form>
                         <div class="personCircle">

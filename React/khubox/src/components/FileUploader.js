@@ -4,7 +4,8 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-solid-svg-icons';
 import '../css/FileUploader.css';
-import {BsFileEarmarkArrowUp} from "react-icons/bs";
+import { BsFileEarmarkArrowUp } from "react-icons/bs";
+import { BsFileEarmark } from "react-icons/bs";
 
 const FileUploader = () => {
   const [files, setFiles] = useState([]);
@@ -49,29 +50,33 @@ const FileUploader = () => {
     URL.revokeObjectURL(url);
   };
 
-  return (
-    <div class="footer">
-      <div className="file-uploader" {...getRootProps()}>
-          <div><BsFileEarmarkArrowUp size="60"/></div>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>파일을 이곳에 드래그하세요.</p>
-        ) : (
-          <p>파일을 드래그하거나 클릭하여 업로드하세요.</p>
-        )}
-      </div>
+    return (
+        <div class="footer">
+            <div className="file-uploader" {...getRootProps()}>
+                <input {...getInputProps()} />
+                {files.length === 0 && <BsFileEarmarkArrowUp size="60" />}
+                {isDragActive ? (
+                    <p>파일을 이곳에 드롭하세요.</p>
+                ) : (
+                    <>
+                        {files.length > 0 ? (
+                            <div>
+                                {files.map((file, index) => (
+                                    <div className="file-item" key={index}>
+                                        <BsFileEarmark className="file-icon" />
+                                        <span key={index}>{file.name}</span>
+                                    </div>
 
-      <div className="uploaded-files">
-        {files.map((file, index) => (
-          <div className="file-item" key={index}>
-            <FontAwesomeIcon icon={faFile} />
-            <span>{file.name}</span>
-            <button onClick={() => handleDownload(file)}>다운로드</button>
-          </div>
-        ))}
-      </div>
-    </div>
-  ); 
+                                ))}
+                            </div>
+                        ) : (
+                            <p>파일을 드래그하거나 클릭하여 업로드하세요.</p>
+                        )}
+                    </>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default FileUploader;
