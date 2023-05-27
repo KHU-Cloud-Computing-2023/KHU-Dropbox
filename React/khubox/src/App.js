@@ -14,6 +14,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/files" element={<Files />} />
         <Route path="/uploader" element={<FileUploader />} />
+        <Route path="/folder/:folderName" element={<Files />} />
         <Route path="/folder" element={<FolderCreator />}/>
       </Routes>
     </Router>

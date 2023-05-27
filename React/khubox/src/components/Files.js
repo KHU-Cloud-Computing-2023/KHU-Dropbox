@@ -1,76 +1,93 @@
-import NavBar from "./Navbar";
-import FileUploader from "./FileUploader";
-import "../css/Files.css";
-import { BiDotsVerticalRounded } from "react-icons/bi";
+import React, { useState } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import NavBar from './Navbar';
+import FileUploader from './FileUploader';
+import FolderCreator from './FolderCreator';
+import '../css/Files.css';
+import { BiDotsVerticalRounded, BiFolder } from 'react-icons/bi';
 
-// 데이터베이스 연동해서 가져오면서 수정할 예정
-function FileLists() {
-    return (
-        <div class="filePage">
-            <div class="fileTitle">
-                <h1>Files</h1>
-                <p>Current Location: Files/</p>
-            </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">File Name</th>
-                        <th scope="col">Modified</th>
-                        <th scope="col">Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>homePage</td>
-                        <td>2023.01.01</td>
-                        <td><BiDotsVerticalRounded /></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>HelloWorld.py</td>
-                        <td>2023.01.01</td>
-                        <td><BiDotsVerticalRounded /></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Mytext.txt</td>
-                        <td>2023.01.01</td>
-                        <td><BiDotsVerticalRounded /></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Mytext2.txt</td>
-                        <td>2023.01.01</td>
-                        <td><BiDotsVerticalRounded /></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>Mytext2.txt</td>
-                        <td>2023.01.01</td>
-                        <td><BiDotsVerticalRounded /></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">6</th>
-                        <td>Mytext2.txt</td>
-                        <td>2023.01.01</td>
-                        <td><BiDotsVerticalRounded /></td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-    );
+function FileLists({ folders, files }) {
+  return (
+    <table className="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">File Name</th>
+          <th scope="col">Modified</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        {/* 파일 행 렌더링 */}
+        {files.map((file, index) => (
+          <tr key={index + 1}>
+            <th scope="row">{index + 1}</th>
+            <td>{file.name}</td>
+            <td>2023.01.01</td>
+            <td><BiDotsVerticalRounded /></td>
+          </tr>
+        ))}
+        {/* 폴더 행 렌더링 */}
+        {folders.map((folder, index) => (
+          <tr key={index + 1 + files.length}>
+            <th scope="row">{index + 1 + files.length}</th>
+            <td>
+              {/* 폴더 클릭 시 해당 경로 페이지로 이동 */}
+              <Link to={`/folder/${folder.name}`} className="folder-link">
+                <div className="folder-icon">
+                  <BiFolder />
+                </div>
+                {folder.name}
+              </Link>
+            </td>
+            <td>2023.01.01</td>
+            <td><BiDotsVerticalRounded /></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 }
+
 function Files() {
-    return (
-        <>
-            <NavBar />
-            <FileLists />
-            <FileUploader/>
-        </>
-    );
+  const [folders, setFolders] = useState([]);
+  const [files, setFiles] = useState([]);
+  const location = useLocation();
+  const params = useParams();
+  const folderName = params.folderName || '';
+
+  // 함수를 통해 폴더를 추가하는 로직 구현
+  const addFolder = (folder) => {
+    setFolders((prevFolders) => [...prevFolders, folder]);
+  };
+
+  // 함수를 통해 파일을 추가하는 로직 구현
+  const addFile = (file) => {
+    setFiles((prevFiles) => [...prevFiles, file]);
+  };
+
+  const navigateBack = () => {
+    window.history.back(); // Navigate back to the previous page
+  };
+
+  return (
+    <>
+      <NavBar />
+      <div className="filePage">
+        <div className="fileTitle">
+          <h1>Files</h1>
+          <p className="currentLocation">Current Location: {`Files/${folderName}`}</p>
+          {folderName === '' && (
+            <div className="folderCreatorContainer">
+              <FolderCreator addFolder={addFolder} />
+            </div>
+          )}
+        </div>
+        <FileLists folders={folders} files={files} />
+      </div>
+      <FileUploader addFile={addFile} />
+    </>
+  );
 }
 
 export default Files;
