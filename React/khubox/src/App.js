@@ -4,7 +4,6 @@ import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Files from './components/Files';
 import FileUploader from './components/FileUploader';
-import FolderCreator from './components/FolderCreator';
 
 function App() {
   return (
@@ -14,8 +13,6 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/files" element={<Files />} />
         <Route path="/uploader" element={<FileUploader />} />
-        <Route path="/folder" element={<FolderCreator />} />
-        <Route path="/folders/:folderId" component={Files} />
       </Routes>
     </Router>
   );
