@@ -18,25 +18,25 @@ function FileLists({ folders, files }) {
         </tr>
       </thead>
       <tbody>
+        {/* 파일 행 렌더링 */}
+        {files.map((file, index) => (
+          <tr key={index + 1}>
+            <th scope="row">{index + 1}</th>
+            <td>{file.name}</td>
+            <td>2023.01.01</td>
+            <td><BiDotsVerticalRounded /></td>
+          </tr>
+        ))}
         {/* 폴더 행 렌더링 */}
         {folders.map((folder, index) => (
-          <tr key={folder.id}>
-            <th scope="row">{index + 1}</th>
+          <tr key={index + 1 + files.length}>
+            <th scope="row">{index + 1 + files.length}</th>
             <td>
               {/* 폴더 클릭 시 해당 경로 페이지로 이동 */}
               <Link to={`/folder/${folder.name}`}>
                 {folder.name}
               </Link>
             </td>
-            <td>2023.01.01</td>
-            <td><BiDotsVerticalRounded /></td>
-          </tr>
-        ))}
-        {/* 파일 행 렌더링 */}
-        {files.map((file, index) => (
-          <tr key={index + 1}>
-            <th scope="row">{index + 1 + folders.length}</th>
-            <td>{file.name}</td>
             <td>2023.01.01</td>
             <td><BiDotsVerticalRounded /></td>
           </tr>

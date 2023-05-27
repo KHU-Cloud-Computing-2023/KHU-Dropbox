@@ -5,6 +5,10 @@
     font-size: 20px;
 }
 
+.folderCreatorContainer {
+    margin-left: auto;
+    margin-right: 200px;
+}  
 .fileTitle {
     width: 60%;
     margin: 8rem 19rem 0;
