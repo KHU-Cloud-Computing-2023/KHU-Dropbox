@@ -1,5 +1,6 @@
 import NavBar from "./Navbar";
-import "./Files.css";
+import FileUploader from "./FileUploader";
+import "../css/Files.css";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 
 // 데이터베이스 연동해서 가져오면서 수정할 예정
@@ -56,12 +57,7 @@ function FileLists() {
                         <td>2023.01.01</td>
                         <td><BiDotsVerticalRounded /></td>
                     </tr>
-                    <tr>
-                        <th scope="row">7</th>
-                        <td>Mytext2.txt</td>
-                        <td>2023.01.01</td>
-                        <td><BiDotsVerticalRounded /></td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -72,6 +68,7 @@ function Files() {
         <>
             <NavBar />
             <FileLists />
+            <FileUploader/>
         </>
     );
 }

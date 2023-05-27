@@ -1,107 +1,108 @@
-body {
-  background-color: #FFFFFF;
-}
+/*body {*/
+/*  background-color: #FFFFFF;*/
+/*}*/
 
-.App form {
-  background-color: #FFFFFF;
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+/*.App form {*/
+/*  background-color: #FFFFFF;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  font-family: 'Inter', sans-serif;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*}*/
 
-.title {
-  left: 509px;
-  right: 517px;
-  top: 135px;
-  bottom: 777px;
+/*.title {*/
+/*  left: 509px;*/
+/*  right: 517px;*/
+/*  top: 135px;*/
+/*  bottom: 777px;*/
 
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 800;
-  font-size: 100px;
-  line-height: 121px;
+/*  font-family: 'Inter';*/
+/*  font-style: normal;*/
+/*  font-weight: 800;*/
+/*  font-size: 100px;*/
+/*  line-height: 121px;*/
 
-  color: #4D37A5;
+/*  color: #4D37A5;*/
 
-}
+/*}*/
 
-.loginForm {
-  box-sizing: border-box;
-  width: 462px;
-  height: 74px;
-  left: 399px;
-  right: 579px;
-  top: 430px;
-  bottom: 520;
+/*.loginForm {*/
+/*  box-sizing: border-box;*/
+/*  width: 462px;*/
+/*  height: 74px;*/
+/*  left: 399px;*/
+/*  right: 579px;*/
+/*  top: 430px;*/
+/*  bottom: 520;*/
 
-  background: #FFFFFF;
-  border: 2px solid #D9D9D9;
+/*  background: #FFFFFF;*/
+/*  border: 2px solid #D9D9D9;*/
 
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 36px;
-  /* border-radius: 5px; */
-}
+/*  font-family: 'Inter';*/
+/*  font-style: normal;*/
+/*  font-weight: 600;*/
+/*  font-size: 30px;*/
+/*  line-height: 36px;*/
+/*  !* border-radius: 5px; *!*/
+/*}*/
 
-.form {
-  box-sizing: border-box;
+/*.form {*/
+/*  box-sizing: border-box;*/
 
-  width: 470px;
-  height: 65px;
-  left: 485px;
-  top: 282px;
+/*  width: 470px;*/
+/*  height: 65px;*/
+/*  left: 485px;*/
+/*  top: 282px;*/
 
-  background: #FFFFFF;
-  border: 2px solid #D9D9D9;
+/*  background: #FFFFFF;*/
+/*  border: 2px solid #D9D9D9;*/
 
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 25px;
-  line-height: 30px;
-  
-  color: #9E9E9E;
-}
+/*  font-family: 'Inter';*/
+/*  font-style: normal;*/
+/*  font-weight: 600;*/
+/*  font-size: 25px;*/
+/*  line-height: 30px;*/
+
+/*  color: #9E9E9E;*/
+/*}*/
 
 
-.click {
-  width: 470px;
-  height: 65px;
-  left: 485px;
-  top: 824px;
+/*.click {*/
+/*  width: 470px;*/
+/*  height: 65px;*/
+/*  left: 485px;*/
+/*  top: 824px;*/
 
-  background: #4D37A5;
+/*  background: #4D37A5;*/
 
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 800;
-  font-size: 30px;
-  line-height: 36px;
-  color: #FFFFFF;
+/*  font-family: 'Inter';*/
+/*  font-style: normal;*/
+/*  font-weight: 800;*/
+/*  font-size: 30px;*/
+/*  line-height: 36px;*/
+/*  color: #FFFFFF;*/
 
-}
+/*}*/
 
-.loginClick {
-  width: 166px;
-  height: 164px;
-  left: 875px;
-  right: 399px;
-  top: 430px;
-  bottom: 430px;
+/*.loginClick {*/
+/*  width: 166px;*/
+/*  height: 164px;*/
+/*  left: 875px;*/
+/*  right: 399px;*/
+/*  top: 430px;*/
+/*  bottom: 430px;*/
 
-  background: #4D37A5;
+/*  background: #4D37A5;*/
 
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 800;
-  font-size: 35px;
-  line-height: 42px;
+/*  font-family: 'Inter';*/
+/*  font-style: normal;*/
+/*  font-weight: 800;*/
+/*  font-size: 35px;*/
+/*  line-height: 42px;*/
 
-  color: #FFFFFF;
-}
+/*  color: #FFFFFF;*/
+
+/*}*/

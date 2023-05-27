@@ -1,16 +1,24 @@
+.footer{
+    width:100%;
+    position:fixed;
+    bottom:0;
+}
+
 .file-uploader {
-    width: 300px;
-    height: 200px;
-    border: 2px dashed #ccc;
-    border-radius: 5px;
+    height: 150px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     cursor: pointer;
+    background-color: #ADADAD;
+
 }
   
 .file-uploader p {
     margin: 0;
+
+
 }
 
 .file-icon {

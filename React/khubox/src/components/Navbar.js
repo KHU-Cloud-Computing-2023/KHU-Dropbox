@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import "./Navbar.css";
+import "../css/Navbar.css";
 import { BsPersonCircle } from "react-icons/bs";
 
 

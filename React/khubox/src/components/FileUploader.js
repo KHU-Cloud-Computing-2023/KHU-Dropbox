@@ -4,6 +4,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-solid-svg-icons';
 import '../css/FileUploader.css';
+import {BsFileEarmarkArrowUp} from "react-icons/bs";
 
 const FileUploader = () => {
   const [files, setFiles] = useState([]);
@@ -49,8 +50,9 @@ const FileUploader = () => {
   };
 
   return (
-    <div>
+    <div class="footer">
       <div className="file-uploader" {...getRootProps()}>
+          <div><BsFileEarmarkArrowUp size="60"/></div>
         <input {...getInputProps()} />
         {isDragActive ? (
           <p>파일을 이곳에 드래그하세요.</p>

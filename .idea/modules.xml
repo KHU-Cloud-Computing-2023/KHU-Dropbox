@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/khubox.iml" filepath="$PROJECT_DIR$/.idea/modules/khubox.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/khubox.main.iml" filepath="$PROJECT_DIR$/.idea/modules/khubox.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/khubox.test.iml" filepath="$PROJECT_DIR$/.idea/modules/khubox.test.iml" />
     </modules>
   </component>
 </project>

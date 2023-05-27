@@ -4,7 +4,6 @@ import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Files from './components/Files';
 import FileUploader from './components/FileUploader';
-import './App.css';
 
 function App() {
   return (

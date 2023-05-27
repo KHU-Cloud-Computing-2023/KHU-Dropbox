@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-
+import "../css/Login.css";
 
 function LogIn() {
     const navigate = useNavigate();
@@ -65,29 +65,27 @@ function LogIn() {
     }
 
     return (
-        <div className="App">
-            <form onSubmit={handleSubmit}>
+        <div class="Login">
             <div class="title">KHUBox</div>
-            <div>
-                <input
-                    type="text"
-                    id="id"
-                    value={id}
-                    placeholder="ID"
-                    class="loginForm"
-                    onChange={handleIdChange}
-                />
-            </div>
-            <div>
-                <input
-                type="password"
-                id="password"
-                value={password}
-                placeholder="Password"
-                class="loginForm"
-                onChange={handlePasswordChange} />
-            </div>
-            <button type="submit" class="loginClick">Log in</button>
+            <form onSubmit={handleSubmit} class="loginForm">
+                <div class="loginInput">
+                        <input
+                            type="text"
+                            id="id"
+                            value={id}
+                            placeholder="ID"
+                            className="id"
+                            onChange={handleIdChange}
+                        />
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            placeholder="Password"
+                            className="password"
+                            onChange={handlePasswordChange}/>
+                </div>
+                <button type="submit" class="loginClick">Login</button>
             </form>
             <p>Don't have an account? <a href="#" onClick={handleSignupClick}>Sign up</a></p>
         </div>

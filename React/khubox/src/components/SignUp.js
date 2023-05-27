@@ -1,7 +1,8 @@
 import { useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import '../App.css';
+import "../css/SignUp.css";
+
 
 function SignUp(){
   const formSchema = yup.object({
@@ -85,43 +86,43 @@ function SignUp(){
   };
 
   return (
-    <div className="App">
-      <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
+    <div className="signup">
       <div className="title">
         KHUBox
       </div>
+      <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <input
         type="text"
         name="id"
-        class="form"
+        class="id"
         placeholder="ID" {...register('id')}
         />
         {errors.id && <p>{errors.id.message}</p>}
         <input
           type="password"
           name="password"
-          class="form"
+          class="password"
           placeholder="Password" {...register('password')}
         />
         {errors.password && <p>{errors.password.message}</p>}
         <input
           type="password"
           name="passwordConfirm"
-          class="form"
+          class="passwordConfirm"
           placeholder="비밀번호 확인" {...register('passwordConfirm')}
         />
         {errors.passwordConfirm && <p>{errors.passwordConfirm.message}</p>}
         <input
           type="text"
           name="name"
-          class="form"
+          class="name"
           placeholder="Name" {...register('name')}
         />
         {errors.name && <p>{errors.name.message}</p>}
         <input
           type="text"
           name="work"
-          class="form"
+          class="work"
           placeholder="Work" {...register('work')}
         />
         <input
@@ -133,14 +134,14 @@ function SignUp(){
         <input
         type="email"
         name="email"
-        class="form"
+        class="email"
         placeholder="Email" {...register('email')}
         />
         {errors.email && <p>{errors.email.message}</p>}
         <input
           type="text"
           name="mobile"
-          class="form"
+          class="mobile"
           placeholder="Mobile" {...register('mobile')}
         />
         {errors.mobile && <p>{errors.mobile.message}</p>}
@@ -148,8 +149,8 @@ function SignUp(){
           type="submit"
           disabled={Object.keys(errors).length > 0 || !watch()}
           onClick={handleSubmit(onSubmit)}
-          class="click"
-          >Submit</button>
+          class="signupClick"
+          >Sign up</button>
       </form>
     </div>
   );

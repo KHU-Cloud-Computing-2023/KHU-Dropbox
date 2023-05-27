@@ -7,15 +7,15 @@
 
 .fileTitle {
     width: 60%;
-    margin: 9rem 19rem 0;
+    margin: 8rem 19rem 0;
 }
 
 .fileTitle>h1 {
-    font-size: 40px;
+    font-size: 36px;
 }
 
 .fileTitle>p {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .table {
