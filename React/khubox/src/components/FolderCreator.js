@@ -1,82 +1,81 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import NavBar from './Navbar';
-import FileUploader from './FileUploader';
-import FolderCreator from './FolderCreator';
-import '../css/Files.css';
-import { BiDotsVerticalRounded } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+import { BiFolder } from 'react-icons/bi';
+import '../css/FolderCreator.css';
 
-function FileLists({ folders, files }) {
-  return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">File Name</th>
-          <th scope="col">Modified</th>
-          <th scope="col">Options</th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* 파일 행 렌더링 */}
-        {files.map((file, index) => (
-          <tr key={index + 1}>
-            <th scope="row">{index + 1}</th>
-            <td>{file.name}</td>
-            <td>2023.01.01</td>
-            <td><BiDotsVerticalRounded /></td>
-          </tr>
-        ))}
-        {/* 폴더 행 렌더링 */}
-        {folders.map((folder, index) => (
-          <tr key={index + 1 + files.length}>
-            <th scope="row">{index + 1 + files.length}</th>
-            <td>
-              {/* 폴더 클릭 시 해당 경로 페이지로 이동 */}
-              <Link to={`/folder/${folder.name}`}>
-                {folder.name}
-              </Link>
-            </td>
-            <td>2023.01.01</td>
-            <td><BiDotsVerticalRounded /></td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}
-
-function Files() {
+const FolderCreator = () => {
+  const [folderName, setFolderName] = useState('');
   const [folders, setFolders] = useState([]);
-  const [files, setFiles] = useState([]);
+  const [currentFolderPath, setCurrentFolderPath] = useState('/folder');
+  const navigate = useNavigate();
 
-  // 함수를 통해 폴더를 추가하는 로직 구현
-  const addFolder = (folder) => {
-    setFolders((prevFolders) => [...prevFolders, folder]);
+  const handleInputChange = (e) => {
+    setFolderName(e.target.value);
   };
 
-  // 함수를 통해 파일을 추가하는 로직 구현
-  const addFile = (file) => {
-    setFiles((prevFiles) => [...prevFiles, file]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (folderName.trim() === '') {
+      return;
+    }
+    const newFolder = {
+      id: Date.now(),
+      name: folderName.trim(),
+    };
+    setFolders([...folders, newFolder]);
+    setFolderName('');
+  };
+
+  const handleFolderClick = (folderName) => {
+    setCurrentFolderPath(`${currentFolderPath}/${folderName}`);
+    navigate(`/folder/${folderName}`);
+  };
+
+  // Render the contents of the current folder
+  const renderFolderContents = () => {
+    const folderPath = currentFolderPath.split('/').slice(1);
+    const currentFolderName = folderPath[folderPath.length - 1];
+    const currentFolder = folders.find((folder) => folder.name === currentFolderName);
+    if (!currentFolder) {
+      return null;
+    }
+
+    return (
+      <div>
+        <h2>Current Folder: {currentFolder.name}</h2>
+        {/* Render the contents of the current folder */}
+      </div>
+    );
   };
 
   return (
-    <>
-      <NavBar />
-      <div className="filePage">
-        <div className="fileTitle">
-          <h1>Files</h1>
-          <p className="currentLocation">Current Location: Files/</p>
-          <div className="folderCreatorContainer">
-            {/* FolderCreator에 addFolder 함수 전달 */}
-            <FolderCreator addFolder={addFolder} />
+    <div className="folder-creator">
+      <form className="form-container" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={folderName}
+          onChange={handleInputChange}
+          placeholder="Folder Name"
+        />
+        <button type="submit">Create Folder</button>
+      </form>
+      <div className="folder-list">
+        {folders.map((folder) => (
+          <div
+            key={folder.id}
+            className="folder-item"
+            onClick={() => handleFolderClick(folder.name)}
+          >
+            <div className="folder-icon">
+              <BiFolder />
+            </div>
+            <div className="folder-name">{folder.name}</div>
           </div>
-        </div>
-        <FileLists folders={folders} files={files} />
+        ))}
       </div>
-      <FileUploader addFile={addFile} />
-    </>
+      {renderFolderContents()}
+    </div>
   );
-}
+};
 
-export default Files;
+export default FolderCreator;
