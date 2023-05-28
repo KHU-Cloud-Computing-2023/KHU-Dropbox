@@ -16,6 +16,7 @@
 .folder-list {
     list-style-type: none;
     padding: 0;
+    border:1px solid;
 }
   
 .folder-list li {
@@ -26,4 +27,16 @@
 .folder-list li:hover {
     font-weight: bold;
 }
-  
+
+.folder-item{
+    display: flex;
+    align-content: center;
+}
+
+.folder-icon{
+    margin:0 10px;
+}
+
+.folder-name{
+    margin:0;
+}

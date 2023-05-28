@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff2be5d5-347b-4176-891a-d36f29b67c7c" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/FileUploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/FileUploader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/Files.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/Files.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/FolderCreator.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/FolderCreator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/LogIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/LogIn.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/React/khubox/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/src/css/FileUploader.css" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/css/FileUploader.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/React/khubox/src/css/Files.css" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/css/Files.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/src/css/SignUp.css" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/css/SignUp.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/css/FolderCreator.css" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/css/FolderCreator.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/css/Navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/css/Navbar.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +59,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
@@ -143,7 +142,7 @@
       <workItem from="1684248688447" duration="21000" />
       <workItem from="1684248731860" duration="126000" />
       <workItem from="1685137905376" duration="9171000" />
-      <workItem from="1685188156089" duration="1483000" />
+      <workItem from="1685188156089" duration="17001000" />
     </task>
     <servers />
   </component>

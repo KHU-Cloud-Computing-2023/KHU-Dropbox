@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react';
 import "../css/Navbar.css";
+import React, { useState } from 'react';
+import FileUploader from './FileUploader';
 import { BsPersonCircle } from "react-icons/bs";
-import FileUploader from "./FileUploader";
 
 function Sidebar() {
     const [showUploader, setShowUploader] = useState(false);
@@ -39,7 +39,6 @@ function Sidebar() {
     );
 }
 function Topbar() {
-
     return (
         <div>
             <nav class="navbar navbar-expand-lg ">
@@ -47,13 +46,12 @@ function Topbar() {
                     <a class="navbar-brand" href="#!">KHUBox</a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <form class="d-flex ms-auto p-2">
-                            <input
-                                class="form-control me-2"
-                                type="search"
-                                placeholder="Search"
-                                aria-label="Search"
-                                />
-                            <button class="btn btn-success" type="submit">Search</button>
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button
+                                class="btn btn-success"
+                                type="submit"
+                            >
+                                Search</button>
                         </form>
                         <div class="personCircle">
                             <button><BsPersonCircle size="32" color="#636363" /></button></div>
@@ -62,13 +60,11 @@ function Topbar() {
             </nav>
         </div>
     );
-
 }
 
 function NavBar() {
     return (
         <>
-
             <Topbar />
             <Sidebar />
         </>

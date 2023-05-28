@@ -36,7 +36,8 @@
     background-color: #fff;
 }
 
-.navbar-brand {
+.navbar-brand,
+.navbar-brand:hover{
     color: #4D37A5;
     font-size: 50px;
     font-weight: 900;

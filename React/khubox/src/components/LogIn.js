@@ -36,7 +36,7 @@ function LogIn() {
                 body: JSON.stringify({id, password})
             });
             if (response.ok) {
-                navigate('/home'); // 이동할 페이지 수정해야함
+                navigate('/files'); // 이동할 페이지 수정해야함
             }
             else if (response.status === 400)
             {
@@ -87,7 +87,7 @@ function LogIn() {
                 </div>
                 <button type="submit" class="loginClick">Login</button>
             </form>
-            <p>Don't have an account? <a href="#" onClick={handleSignupClick}>Sign up</a></p>
+            <p>Don't have an account? <a href="/#" onClick={handleSignupClick}>Sign up</a></p>
         </div>
       );
 }
