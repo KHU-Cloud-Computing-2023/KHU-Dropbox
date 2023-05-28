@@ -5,6 +5,7 @@ import LogIn from './components/LogIn';
 import Files from './components/Files';
 import FileUploader from './components/FileUploader';
 import FolderCreator from './components/FolderCreator';
+import GroupPage from './components/GroupPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/uploader" element={<FileUploader />} />
         <Route path="/folder/:folderName" element={<Files />} />
         <Route path="/folder" element={<FolderCreator />}/>
+        <Route path="GroupPage" element={<GroupPage />} />
       </Routes>
     </Router>
   );

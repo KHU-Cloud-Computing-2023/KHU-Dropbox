@@ -1,0 +1,59 @@
+/* GroupPage styles */
+.grouppage {
+  margin-top: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+/* GroupQuery styles */
+.groupquery {
+  margin-bottom: 10px;
+}
+
+.groupquery input {
+  width: 200px;
+}
+
+.groupquery button {
+  margin-left: 10px;
+}
+
+/* JoinedGroups styles */
+.joinedgroups {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.joinedgroups h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.joinedgroups p {
+  margin: 0;
+}
+
+/* InviteForm styles */
+.InviteForm {
+  margin-bottom: 10px;
+}
+
+.InviteForm label {
+  display: block;
+  font-weight: bold;
+}
+
+.InviteForm input[type="text"],
+.InviteForm input[type="email"] {
+  width: 170px;
+}
