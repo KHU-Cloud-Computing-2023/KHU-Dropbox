@@ -12,16 +12,26 @@ function JoinedGroups({ queryKeyword  }) {
     : joinedGroups;
 
   return (
-    <div className='joinedgroups'>
-      <h2>Joined Groups</h2>
-      {/*Show joined Groups list*/}
+<div className='joinedgroups'>
+  <table>
+    <thead>
+      <tr>
+        <th>Group Name</th>
+        <th>Members</th>
+      </tr>
+    </thead>
+    <tbody>
+      {/* Show joined Groups list */}
       {filteredGroups.map((group) => (
-        <div key={group.name}>
-          <h3>{group.name}</h3>
-          <p>Members: {group.members}</p>
-        </div>
+        <tr key={group.name}>
+          <td>{group.name}</td>
+          <td><p>{group.members}</p></td>
+        </tr>
       ))}
-    </div>
+    </tbody>
+  </table>
+</div>
+    
   );
 }
 

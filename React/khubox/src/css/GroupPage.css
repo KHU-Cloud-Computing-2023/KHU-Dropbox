@@ -1,16 +1,18 @@
 /* GroupPage styles */
+
 .grouppage {
-  margin-top: 20px;
+  width: 60%;
+    margin: 5rem 19rem 0;
 }
-
+.header {
+  display: flex;
+  align-items: center;
+}
 h1 {
-  font-size: 24px;
+  font-size: 36px;
   font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.row {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  margin-right: 20px;
 }
 
 /* GroupQuery styles */
@@ -29,18 +31,23 @@ h1 {
 /* JoinedGroups styles */
 .joinedgroups {
   background-color: #f5f5f5;
-  padding: 10px;
-  margin-bottom: 10px;
+  
 }
 
-.joinedgroups h3 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 5px;
+.joinedgroups table {
+  width: 100%; 
+}
+
+.joinedgroups th, .joinedgroups td {
+  text-align: center; 
+}
+
+.joinedgroups th {
+  vertical-align: middle; 
 }
 
 .joinedgroups p {
-  margin: 0;
+  margin: 0; 
 }
 
 /* InviteForm styles */
