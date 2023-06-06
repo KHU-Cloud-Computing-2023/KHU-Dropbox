@@ -40,6 +40,7 @@ import java.net.URL;
 import java.util.Base64;
 
 @Slf4j
+@CrossOrigin("*")
 @RequestMapping("/auth")
 @Controller
 @RequiredArgsConstructor
