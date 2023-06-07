@@ -3,10 +3,37 @@ import React, { useState } from 'react';
 function InviteForm() {
   const [email, setEmail] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // send invite email here
-    // render UI according to invite result
+    // API call to send invite email
+    try {
+      const response = await fetch('http://localhost:3000/invite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send invite email');
+      }
+
+      // update UI state or show success message
+      // render UI according to invite result
+      const resultData = await response.json();
+      if (resultData.success) {
+        console.log('Invite sent successfully');
+        // 
+      } else {
+        console.log('Failed to send invite');
+        // 
+      }
+    } catch (error) {
+      console.log('Error sending invite email:', error);
+      // 
+    }
   };
 
   return (

@@ -6,6 +6,7 @@ import Files from './components/Files';
 import FileUploader from './components/FileUploader';
 import FolderCreator from './components/FolderCreator';
 import GroupPage from './components/GroupPage';
+import GroupDetailsPage from './components/GroupDetailsPage';
 
 function App() {
   const [message, setMessage] = useState("");
@@ -28,6 +29,7 @@ function App() {
         <Route path="/folder/:folderName" element={<Files />} />
         <Route path="/folder" element={<FolderCreator />}/>
         <Route path="GroupPage" element={<GroupPage />} />
+        <Route path="/GroupPage/:groupId" element={<GroupDetailsPage />} />
       </Routes>
     </Router>
   );
