@@ -44,20 +44,11 @@ public class FileService {
 	 * @param file
 	 * @return
 	 */
-	public String uploadToAWS(MultipartFile file, HttpServletRequest request) {
+	public String uploadToAWS(String path, MultipartFile file) {
 		String key = UUID.randomUUID() + "_" + file.getOriginalFilename();
 		try {
-			// 세션에서 ID 가져오기
-			String id = (String) request.getSession().getAttribute("id");
-			if (id == null) {
-				// ID가 없는 경우 처리
-				// 예외를 던지거나 기본 폴더에 업로드할 수 있습니다.
-				// 여기서는 예외를 던지도록 하겠습니다.
-				throw new IllegalStateException("ID not found in session");
-			}
-
 			// 폴더 경로 설정
-			String folderPath = id + "/";
+			String folderPath = path + "/";
 
 			ObjectMetadata metadata = new ObjectMetadata();
 			metadata.setContentType(file.getContentType());
@@ -89,15 +80,33 @@ public class FileService {
 		s3Client.deleteObject(bucketName, fileKey);
 	}
 
-	public void rename(String sourceKey, String destinationKey){
-		s3Client.copyObject(
-				bucketName,
-				sourceKey,
-				bucketName,
-				destinationKey
-		);
+	public void rename(String sourceKey, String destinationKey) {
+		String sourceExtension = "";
+		String destinationExtension = "";
+
+		if (sourceKey.contains(".")) {
+			sourceExtension = sourceKey.substring(sourceKey.lastIndexOf("."));
+		}
+		if (destinationKey.contains(".")) {
+			destinationExtension = destinationKey.substring(destinationKey.lastIndexOf("."));
+		}
+
+		if (!sourceExtension.equals(destinationExtension)) {
+			destinationKey += sourceExtension;
+		}
+
+		// Extract the directory path from the sourceKey
+		String directoryPath = sourceKey.substring(0, sourceKey.lastIndexOf("/") + 1);
+
+		// Concatenate the directory path with the destinationKey
+		String newDestinationKey = directoryPath + destinationKey;
+
+		s3Client.copyObject(bucketName, sourceKey, bucketName, newDestinationKey);
 		s3Client.deleteObject(bucketName, sourceKey);
 	}
+
+
+
 
 	/**
 	 * file 다운로드
@@ -201,19 +210,23 @@ public class FileService {
 	 *
 	 * @return 버킷 내 파일 목록
 	 */
-	public List<String> listBucketContents(HttpServletRequest request) {
+	public List<String> listBucketContents(String folderName) {
 		List<String> fileKeys = new ArrayList<>();
-		String folderName = (String) request.getSession().getAttribute("id"); // 세션에서 로그인 아이디 가져오기
 
 		// 폴더명과 일치하는 파일만 가져오기
 		ObjectListing objectListing = s3Client.listObjects(bucketName, folderName);
 		for (S3ObjectSummary objectSummary : objectListing.getObjectSummaries()) {
 			String fileKey = objectSummary.getKey();
-			fileKeys.add(fileKey);
+
+			// 파일 경로가 정확히 폴더명으로 시작하는 경우에만 추가
+			if (fileKey.startsWith(folderName + "/")) {
+				fileKeys.add(fileKey);
+			}
 		}
 
 		return fileKeys;
 	}
+
 
 	public String makeBucketDirectory(String id) {
 		String folderName = id; // 회원 아이디 이름 등으로 설정

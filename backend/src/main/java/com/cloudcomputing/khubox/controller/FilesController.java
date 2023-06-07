@@ -31,7 +31,8 @@ public class FilesController {
 
 	@GetMapping("/file")
 	public String file(Model model, HttpServletRequest request) {
-		List<String> fileKeys = fileService.listBucketContents(request);
+		String folderName = (String) request.getSession().getAttribute("id"); // 세션에서 로그인 아이디 가져오기
+		List<String> fileKeys = fileService.listBucketContents(folderName);
 		model.addAttribute("fileKeys", fileKeys);
 
 		return "files/file";
@@ -44,7 +45,8 @@ public class FilesController {
 
 	@PostMapping("/upload")
 	public String uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request){
-		fileService.uploadToAWS(file, request);
+		String folderName = (String) request.getSession().getAttribute("id"); // 세션에서 로그인 아이디 가져오기
+		fileService.uploadToAWS(folderName, file);
 		log.info("upload File={}", file);
 		return "redirect:/files/file";
 	}
@@ -57,14 +59,25 @@ public class FilesController {
 		log.info("download File key={}",fileKey);
 		// 파일 다운로드 로직 추가
 		fileService.download(fileKey, fileKey, request, response);
-		return "files/file"; // 파일 다운로드 완료 후 이동할 뷰 이름
+		return "files/file";
 	}
 
 	@GetMapping("/update")
-	public String update(@RequestParam("fileKey") String fileKey) {
-		log.info("update File key={}",fileKey);
-		// 파일 다운로드 로직 추가
-		fileService.rename(fileKey, fileKey+"update");
-		return "files/file"; // 파일 다운로드 완료 후 이동할 뷰 이름
+	public String updateFile(@RequestParam("fileKey") String fileKey, Model model) {
+
+		model.addAttribute("fileKey", fileKey);
+
+		return "files/update"; // 업데이트를 위한 뷰 페이지 이름 리턴
 	}
+
+
+	@PostMapping("/update")
+	public String handleUpdateFile(@RequestParam("fileKey") String fileKey, @RequestParam("rename") String rename) {
+		log.info("Update File key={}", fileKey);
+
+		// 파일 이름 변경 로직 추가
+		fileService.rename(fileKey, rename);
+		return "redirect:/files/file";
+	}
+
 }

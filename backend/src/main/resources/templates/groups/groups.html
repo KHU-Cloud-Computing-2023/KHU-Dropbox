@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Group List</title>
+</head>
+<body>
+<h1>Groups</h1>
+<ul>
+    <li th:each="group : ${groups}">
+        <a th:href="@{/groups/{groupName}(groupName=${group.name})}">
+            <span th:text="${group.name}"></span>
+        </a>
+    </li>
+</ul>
+
+<a th:href="@{/groups/makegroup}">Add Group</a>
+
+</body>
+</html>

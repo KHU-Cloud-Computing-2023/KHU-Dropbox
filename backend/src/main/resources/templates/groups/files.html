@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TEST</title>
+</head>
+<body>
+<a th:href="@{/groups/{groupName}/upload(groupName=${groupName})}">Upload</a>
+
+<a th:href="@{/groups/{groupName}/getmembers(groupName=${groupName})}">Get Members</a>
+
+<a th:href="@{/groups/{groupName}/addmember(groupName=${groupName})}">Add Member</a>
+
+<ul>
+    <li th:each="fileKey : ${fileKeys}">
+        <span th:text="${fileKey}"></span>
+        <a th:href="@{/groups/{groupName}/download(groupName=${groupName}, fileKey=${fileKey})}">Download</a>
+    </li>
+</ul>
+
+</body>
+</html>

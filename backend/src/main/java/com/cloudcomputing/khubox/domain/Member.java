@@ -9,7 +9,7 @@ import lombok.Data;
 @Table(name = "members")
 public class Member {
 	@Id
-	@Column(name = "id", nullable = false)
+	@Column(name = "member_id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
@@ -27,13 +27,5 @@ public class Member {
 	private String work;
 
 	private String education;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 }

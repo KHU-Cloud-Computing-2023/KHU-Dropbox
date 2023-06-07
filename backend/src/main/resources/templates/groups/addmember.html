@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>업로드</title>
+</head>
+<body>
+<h2>업로드</h2>
+<form th:action="@{'/groups/' + ${groupName} + '/addmember'}" method="POST">
+    <div>
+        <label for="memberId">아이디:</label>
+        <input type="text" id="memberId" name="memberId">
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update File</title>
+</head>
+<body>
+<h2>Update File</h2>
+
+<form action="/files/update" method="POST">
+    <input type="hidden" name="fileKey" th:value="${fileKey}">
+
+    <div>
+        <label for="rename">New Name:</label>
+        <input type="text" id="rename" name="rename">
+    </div>
+
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>

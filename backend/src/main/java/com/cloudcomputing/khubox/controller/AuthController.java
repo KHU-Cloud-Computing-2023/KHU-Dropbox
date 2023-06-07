@@ -9,6 +9,7 @@ import com.cloudcomputing.khubox.config.AuthConfig;
 import com.cloudcomputing.khubox.domain.LoginForm;
 import com.cloudcomputing.khubox.domain.Member;
 import com.cloudcomputing.khubox.service.AuthService;
+import com.cloudcomputing.khubox.service.FileService;
 import com.nimbusds.jose.shaded.gson.JsonObject;
 import com.nimbusds.oauth2.sdk.AuthorizationCode;
 import com.nimbusds.oauth2.sdk.TokenResponse;
@@ -28,6 +29,7 @@ import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCo
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -46,7 +48,9 @@ import java.util.Base64;
 @RequiredArgsConstructor
 public class AuthController {
 
+
 	private final AuthService authService;
+	private final FileService fileService;
 
 	@Autowired
 	AuthConfig authConfig;
@@ -162,7 +166,10 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	public String signup(@ModelAttribute Member member) {
+
+		fileService.makeBucketDirectory(member.getLoginId());
 		authService.createMember(member);
+
 		log.info("signup, member={}", member);
 		return "redirect:/auth/login";
 	}
@@ -183,7 +190,41 @@ public class AuthController {
 
 		request.getSession().setAttribute("id", loginMember.getLoginId());
 
-		return "redirect:/files/file";
+		return "redirect:/";
+	}
+
+	@GetMapping("/updateuser")
+	public String showUpdateForm(Model model, HttpServletRequest request) {
+		// Get the login ID from the authenticated user
+		String loginId = (String) request.getSession().getAttribute("id");
+
+		// Find the existing member based on the login ID
+		Member existingMember = authService.findMemberByLoginId(loginId);
+
+		if (existingMember == null) {
+			// Handle the case where the member does not exist
+			return "redirect:/auth/login";
+		}
+
+		// Pass the existing member to the view
+		model.addAttribute("member", existingMember);
+
+		return "auth/updateuser";
+	}
+
+
+	@PostMapping("/updateuser")
+	public String update(@ModelAttribute Member member, HttpServletRequest request) {
+
+		Member updateMember = authService.updateMember(member, request);
+
+		log.info("update, member={}", updateMember);
+
+		if (updateMember == null) {
+			return "auth/login";
+		}
+
+		return "redirect:/";
 	}
 
 }

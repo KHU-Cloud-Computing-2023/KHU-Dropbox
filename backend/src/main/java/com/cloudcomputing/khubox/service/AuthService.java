@@ -3,6 +3,7 @@ package com.cloudcomputing.khubox.service;
 import com.cloudcomputing.khubox.config.AuthConfig;
 import com.cloudcomputing.khubox.domain.Member;
 import com.cloudcomputing.khubox.repository.MemberRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,33 @@ public class AuthService {
 	public Member createMember(Member member) {
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		memberRepository.save(member);
-		fileService.makeBucketDirectory(member.getLoginId());
 		return member;
 	}
+
+	public Member updateMember(Member updatedMember, HttpServletRequest request) {
+		String loginId = (String) request.getSession().getAttribute("id");
+		Member existingMember = memberRepository.findByLoginId(loginId).orElse(null);
+
+		if (existingMember != null){
+			existingMember.setEmail(updatedMember.getEmail());
+			existingMember.setWork(updatedMember.getWork());
+			existingMember.setEducation(updatedMember.getEducation());
+
+			// Update the password if a new password is provided
+			if (updatedMember.getPassword() != null && !updatedMember.getPassword().isEmpty()) {
+				existingMember.setPassword(passwordEncoder.encode(updatedMember.getPassword()));
+			}
+
+			// Save the updated member
+			memberRepository.save(existingMember);
+			return existingMember;
+		}
+
+		return null; // Member not found
+	}
+
+	public Member findMemberByLoginId(String loginId) {
+		return memberRepository.findByLoginId(loginId).orElse(null);
+	}
+
 }
