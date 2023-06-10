@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function InviteForm() {
+function InviteForm({groupId}) {
   const [email, setEmail] = useState('');
 
   const handleSubmit = async (e) => {
@@ -8,7 +8,7 @@ function InviteForm() {
     // send invite email here
     // API call to send invite email
     try {
-      const response = await fetch('http://localhost:3000/invite', {
+      const response = await fetch(`http://localhost:3000/groups/${groupId}/addmember`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

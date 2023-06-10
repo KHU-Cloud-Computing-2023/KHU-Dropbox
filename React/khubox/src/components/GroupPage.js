@@ -17,28 +17,40 @@ function GroupPage() {
   const handleNewGroupSubmit = async (event) => {
     event.preventDefault();
     const newGroupName = newGroupNameRef.current.value;
-    const response = await createGroup(newGroupName); // creat group request
-    if (response.status === 'success') {
-      const newGroup = { name: newGroupName }; // 
-      setJoinedGroups([...joinedGroups, newGroup]);
+    try {
+      const response = await createGroup(newGroupName); // create group request
+      if (response) {
+        const newGroup = { name: newGroupName };
+        setJoinedGroups([...joinedGroups, newGroup]);
+      }
+    } catch (error) {
+      console.error('Error creating group:', error);
+      // handle error
     }
     newGroupNameRef.current.value = '';
   };
+  
 
   const createGroup = (groupName) => {
-    return fetch('/api/createGroup', {
+    return fetch(`http://localhost:3000/groups/${groupName}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ groupName }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to create group');
+        }
+        return response.json();
+      })
       .catch((error) => {
         console.error('Error creating group:', error);
         // handle error
       });
   };
+  
 
   const handlePopupToggle = () => {
     setShowPopup(!showPopup);

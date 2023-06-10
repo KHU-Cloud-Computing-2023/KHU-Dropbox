@@ -18,12 +18,12 @@ function GroupDetailsPage({ groupId }) {
       try {
 
         // get file information
-        const filesResponse = await fetch(`/api/groups/${groupId}/files`);
+        const filesResponse = await fetch(`http://localhost:3000/groups/${groupId}/files`);
         const filesData = await filesResponse.json();
         setFiles(filesData);
 
         // get member information
-        const membersResponse = await fetch(`/api/groups/${groupId}/members`);
+        const membersResponse = await fetch(`http://localhost:3000/groups/${groupId}/getmembers`);
         const membersData = await membersResponse.json();
         setMembers(membersData);
       } catch (error) {
@@ -37,7 +37,7 @@ function GroupDetailsPage({ groupId }) {
   const handleDeleteMember = async (memberId) => {
     try {
       // Send a request to the backend to delete the member with memberId
-      await fetch(`/api/groups/${groupId}/members/${memberId}`, {
+      await fetch(`http://localhost:3000/groups/${groupId}/getmembers/${memberId}`, {
         method: 'DELETE',
       });
 
