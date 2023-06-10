@@ -5,6 +5,7 @@ import com.cloudcomputing.khubox.domain.LoginForm;
 import com.cloudcomputing.khubox.domain.Member;
 import com.cloudcomputing.khubox.service.AuthService;
 import com.cloudcomputing.khubox.service.FileService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,12 +13,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Slf4j
 @CrossOrigin("*")
@@ -30,13 +35,13 @@ public class FilesController {
 
 
 	@GetMapping("/file")
-	public String file(Model model, HttpServletRequest request) {
-		String folderName = (String) request.getSession().getAttribute("id"); // 세션에서 로그인 아이디 가져오기
+	public ResponseEntity<List<String>> getFileList(HttpServletRequest request) {
+		String folderName = (String) request.getSession().getAttribute("id");
 		List<String> fileKeys = fileService.listBucketContents(folderName);
-		model.addAttribute("fileKeys", fileKeys);
 
-		return "files/file";
+		return ResponseEntity.ok(fileKeys);
 	}
+
 
 	@GetMapping("/upload")
 	public String upload() {
@@ -48,18 +53,19 @@ public class FilesController {
 		String folderName = (String) request.getSession().getAttribute("id"); // 세션에서 로그인 아이디 가져오기
 		fileService.uploadToAWS(folderName, file);
 		log.info("upload File={}", file);
-		return "redirect:/files/file";
+		return "redirect:http://localhost:3000/files/file";
 	}
 
 	@GetMapping("/download")
-	public String downloadFile(@RequestParam("fileKey") String fileKey,
-							   HttpServletRequest request,
-							   HttpServletResponse response
-	) {
-		log.info("download File key={}",fileKey);
+	public ResponseEntity<?> downloadFile(@RequestParam("fileKey") String fileKey,
+	                                             HttpServletRequest request,
+	                                             HttpServletResponse response) {
+		log.info("download File key={}", fileKey);
 		// 파일 다운로드 로직 추가
 		fileService.download(fileKey, fileKey, request, response);
-		return "files/file";
+
+		// 파일이 존재하는 경우 다운로드 응답 반환
+		return ResponseEntity.ok("Download Success");
 	}
 
 	@GetMapping("/update")
@@ -71,13 +77,28 @@ public class FilesController {
 	}
 
 
-	@PostMapping("/update")
-	public String handleUpdateFile(@RequestParam("fileKey") String fileKey, @RequestParam("rename") String rename) {
-		log.info("Update File key={}", fileKey);
 
-		// 파일 이름 변경 로직 추가
-		fileService.rename(fileKey, rename);
-		return "redirect:/files/file";
+	@PostMapping("/update")
+	public ResponseEntity<String> handleUpdateFile(@RequestBody String requestBody) {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			JsonNode jsonNode = objectMapper.readTree(requestBody);
+
+			String fileKey = jsonNode.get("fileKey").asText();
+			String rename = jsonNode.get("rename").asText();
+
+			log.info("Update File key={}, rename={}", fileKey, rename);
+
+			// 파일 이름 변경 로직 추가
+			fileService.rename(fileKey, rename);
+
+			return ResponseEntity.ok("File renamed Success");
+		} catch (Exception e) {
+			// 처리 중 에러가 발생한 경우 예외 처리
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error");
+		}
 	}
+
+
 
 }
