@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BiFolder } from 'react-icons/bi';
-import '../css/FolderCreator.css';
+import '../../css/FolderCreator.css';
 
 const FolderCreator = ({ addFolder }) => {
   const [folderName, setFolderName] = useState('');

@@ -4,9 +4,9 @@ import React, { useState, useRef } from 'react';
 import GroupQuery from './GroupQuery';
 import JoinedGroups from './JoinedGroups';
 // import InviteForm from './InviteForm';
-import '../css/GroupPage.css';
-import Navbar from './Navbar';
-import imageSrc from './image9.png';
+import '../../css/GroupPage.css';
+import Navbar from '../Navbar';
+import imageSrc from '../image9.png';
 
 function GroupPage() {
   const [queryKeyword, setQueryKeyword] = useState('');
@@ -29,7 +29,7 @@ function GroupPage() {
     }
     newGroupNameRef.current.value = '';
   };
-  
+
 
   const createGroup = (groupName) => {
     return fetch(`http://localhost:3000/groups/${groupName}`, {
@@ -50,7 +50,7 @@ function GroupPage() {
         // handle error
       });
   };
-  
+
 
   const handlePopupToggle = () => {
     setShowPopup(!showPopup);
@@ -62,34 +62,34 @@ function GroupPage() {
 
   return (
     <>
-    <Navbar/>
-    <div className='grouppage'>
-      <div className="header">
-        <h1>Groups</h1>
+      <Navbar />
+      <div className='grouppage'>
+        <div className="header">
+          <h1>Groups</h1>
 
-      <button onClick={handlePopupToggle}>
-        <img src={imageSrc} alt="Add Group" />
-      </button>
+          <button onClick={handlePopupToggle}>
+            <img src={imageSrc} alt="Add Group" />
+          </button>
 
-        {showPopup && (
-        <div className="popup">
-          <form onSubmit={handleNewGroupSubmit}>
-            <input
-              type="text"
-              ref={newGroupNameRef}
-              placeholder="Enter Group Name"
-            />
-            <button type="submit">Create Group</button>
-          </form>
+          {showPopup && (
+            <div className="popup">
+              <form onSubmit={handleNewGroupSubmit}>
+                <input
+                  type="text"
+                  ref={newGroupNameRef}
+                  placeholder="Enter Group Name"
+                />
+                <button type="submit">Create Group</button>
+              </form>
+            </div>
+          )}
         </div>
-        )}
-        </div>
-      <GroupQuery onQuery={handleQuery} />
-      <JoinedGroups queryKeyword={queryKeyword} />
+        <GroupQuery onQuery={handleQuery} />
+        <JoinedGroups queryKeyword={queryKeyword} />
 
-      
-      {/* Other */}
-    </div>
+
+        {/* Other */}
+      </div>
     </>
   );
 }

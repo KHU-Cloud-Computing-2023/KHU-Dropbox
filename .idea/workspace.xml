@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff2be5d5-347b-4176-891a-d36f29b67c7c" name="변경" comment="변경">
-      <change beforePath="$PROJECT_DIR$/React/khubox/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/React/khubox/src/components/SearchFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/Files.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/Files.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/LogIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/LogIn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/css/GroupPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/css/GroupPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/css/Navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/css/Navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +38,24 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -51,7 +76,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/src/main/resources" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
@@ -86,6 +111,11 @@
       <window_info anchor="right" id="Database" order="1" weight="0.25" />
       <window_info anchor="right" id="Gradle" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/src/main/resources" />
+    </key>
   </component>
   <component name="RunManager" selected="Spring Boot.KhuboxApplication (1)">
     <configuration name="hello" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:3000/api/hello">
@@ -148,6 +178,7 @@
       <workItem from="1685774298851" duration="12000" />
       <workItem from="1685774349358" duration="2368000" />
       <workItem from="1685782234183" duration="3945000" />
+      <workItem from="1686442258601" duration="11721000" />
     </task>
     <servers />
   </component>

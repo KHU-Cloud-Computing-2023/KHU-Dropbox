@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import '../css/GroupDetailsPage.css';
-import Navbar from './Navbar';
+import '../../css/GroupDetailsPage.css';
+import Navbar from '../Navbar';
 import InviteForm from './InviteForm';
 
 function GroupDetailsPage({ groupId }) {
@@ -52,15 +52,15 @@ function GroupDetailsPage({ groupId }) {
 
   return (
     <>
-    <Navbar/>
-    <div className='GroupDetails'>
+      <Navbar />
+      <div className='GroupDetails'>
         <h1>Groups</h1>
         <InviteForm />
-          <hr/>
-          <h3>Members</h3>
-          <hr/>
+        <hr />
+        <h3>Members</h3>
+        <hr />
         <ul>
-        {members.map((member) => (
+          {members.map((member) => (
             <li key={member.id}>
               {member.name}
               <button onClick={() => handleDeleteMember(member.id)}>
@@ -76,7 +76,7 @@ function GroupDetailsPage({ groupId }) {
             <li key={file.id}>{file.name}</li>
             ))}
         </ul> */}
-        </div>
+      </div>
     </>
   );
 }

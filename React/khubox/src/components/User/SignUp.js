@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import "../css/SignUp.css";
+import "../../css/SignUp.css";
 
 
 function SignUp() {
@@ -46,14 +46,14 @@ function SignUp() {
     //   /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
     //   '올바른 형식으로 다시 입력해주세요.'
     // ),
-    // mobile : yup
-    //     .string()
-    //     .required('010-xxxx-xxxx 형식으로 번호를 입력해주세요.')
-    //     .matches(
-    //         /^[0-9]{3}[-]+[0-9]{4}[-]+[0-9]{4}$/,
-    //         '올바른 형식으로 다시 입력해주세요.'
-    //     ),
-    // // .mobile('형식이 다릅니다.')
+    mobile: yup
+      .string()
+      .required('010-xxxx-xxxx 형식으로 번호를 입력해주세요.')
+      .matches(
+        /^[0-9]{3}[-]+[0-9]{4}[-]+[0-9]{4}$/,
+        '올바른 형식으로 다시 입력해주세요.'
+      ),
+    // .mobile('형식이 다릅니다.')
   })
 
   const {
@@ -67,21 +67,13 @@ function SignUp() {
   });
 
   const onSubmit = (data) => {
-    const requestData = {
-      loginId: data.id,
-      name: data.name,
-      password: data.password,
-      email: data.email,
-      work: data.work,
-      education: data.education
-    };
-    console.log(requestData);
-    fetch('/auth/signup', {
+    console.log(data);
+    fetch('/api/signup', { //api end-point, 서버구현 후 수정
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(requestData)
+      body: JSON.stringify(data)
     })
       .then(response => response.json())
       .then(data => {
@@ -91,27 +83,7 @@ function SignUp() {
       .catch((error) => {
         console.error('Error:', error);
       });
-  }
-
-
-  // const onSubmit = (data) => {
-  //   console.log(data);
-  //   fetch('/auth/signup', { //api end-point, 서버구현 후 수정
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(data)
-  //   })
-  //       .then(response => response.json())
-  //       .then(data => {
-  //         console.log('Success:', data);
-  //         // 추후 api통신을 통해 아이디 중복 검사 로직 추가 예정
-  //       })
-  //       .catch((error) => {
-  //         console.error('Error:', error);
-  //       });
-  // };
+  };
 
   return (
     <div className="signup">
@@ -121,7 +93,7 @@ function SignUp() {
       <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          name="loginId"
+          name="id"
           class="id"
           placeholder="ID" {...register('id')}
         />
@@ -166,13 +138,13 @@ function SignUp() {
           placeholder="Email" {...register('email')}
         />
         {errors.email && <p class="error">{errors.email.message}</p>}
-        {/* <input
-              type="text"
-              name="mobile"
-              class="mobile"
-              placeholder="Mobile" {...register('mobile')}
-          />
-          {errors.mobile && <p class="error">{errors.mobile.message}</p>} */}
+        <input
+          type="text"
+          name="mobile"
+          class="mobile"
+          placeholder="Mobile" {...register('mobile')}
+        />
+        {errors.mobile && <p class="error">{errors.mobile.message}</p>}
         <button
           type="submit"
           disabled={Object.keys(errors).length > 0 || !watch()}

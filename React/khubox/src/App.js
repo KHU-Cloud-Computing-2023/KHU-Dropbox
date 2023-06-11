@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SignUp from './components/SignUp';
-import LogIn from './components/LogIn';
-import Files from './components/Files';
-import FileUploader from './components/FileUploader';
-import FolderCreator from './components/FolderCreator';
-import GroupPage from './components/GroupPage';
-import GroupDetailsPage from './components/GroupDetailsPage';
+import SignUp from './components/User/SignUp';
+import LogIn from './components/User/LogIn';
+import Files from './components/Files/Files';
+// import FileUploader from './components/Files/FileUploader';
+import FolderCreator from './components/Files/FolderCreator';
+import GroupPage from './components/Group/GroupPage';
+import GroupDetailsPage from './components/Group/GroupDetailsPage';
 
 function App() {
   const [message, setMessage] = useState("");

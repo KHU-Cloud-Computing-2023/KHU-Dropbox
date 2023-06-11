@@ -1,6 +1,6 @@
 .bd-sidebar {
     position: fixed;
-    top: 7rem;
+    top: 10rem;
     left: 3rem;
     z-index: 1000;
     height: calc(100vh - 4rem);
@@ -24,15 +24,15 @@
 
 .bd-sidebar .nav>li>button {
     display: block;
-    margin-top: .5rem;
-    padding: .75rem 3rem;
+    /*margin-top: .5rem;*/
+    padding: 1rem 1rem;
     font-size: 22px;
 }
 
 .navbar {
     position: fixed;
     width: 100%;
-    top: 0;
+    top: 1.5rem;
     background-color: #fff;
 }
 
@@ -62,4 +62,10 @@ a {
 
 button {
     border: none;
+}
+
+.search-input{
+    border-radius: 50px;
+    margin-left:3rem;
+    height:60px;
 }

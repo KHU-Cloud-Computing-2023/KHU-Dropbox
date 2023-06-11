@@ -1,62 +1,78 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/Navbar.css";
 import React, { useState } from 'react';
-import FileUploader from './FileUploader';
+import FileUploader from './Files/FileUploader';
+import FolderCreator from './Files/FolderCreator';
+import SearchFile from './Files/SearchFile';
 import { BsPersonCircle } from "react-icons/bs";
 
 function Sidebar() {
     const [showUploader, setShowUploader] = useState(false);
+    const [activeMenu, setActiveMenu] = useState(null);
+    const [showFileUploader, setShowFileUploader] = useState(false);
+    const [showFolderCreator, setShowFolderCreator] = useState(false);
 
     const handleButtonClick = () => {
         setShowUploader(!showUploader);
     };
 
+    const handleMenuClick = (menu) => {
+        setActiveMenu(menu);
+    };
+
+    const handleFileUploaderToggle = () => {
+        setShowFileUploader(!showFileUploader);
+    };
+
+    const handleFolderCreatorToggle = () => {
+        setShowFolderCreator(!showFolderCreator);
+    };
+
     return (
-        // <div class="container-fluid">
-        // <div class="row flex-nowrap">
         <div class="col-2 row- bd-sidebar">
             <ul class="nav">
-                <li class="home"><a href="#!">Home</a></li>
-                <li><a href="#!">Files</a></li>
-                <li><a href="#!">Account</a></li>
-                <li><a href="#!">Groups</a></li>
-                <li><a href="#!">User Activity</a></li>
-                <li><a href="#!">Trash</a></li>
-                <li>
+                <li className={`button ${activeMenu === 'button' ? 'active' : ''}`}>
                     {showUploader && <FileUploader />}
                     <button
-                        class="btn btn-success upload"
+                        className="btn btn-success upload"
                         type="submit"
-                        onClick={handleButtonClick}>
-                        Upload Files
+                        onClick={handleButtonClick}
+                    >
+                        + 새로 만들기
                     </button>
+                    {showUploader && (
+                        <ul className="upload-options">
+                            <li>
+                                <a href="#!" onClick={handleFileUploaderToggle}>
+                                    파일 업로드
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#!" onClick={handleFolderCreatorToggle}>
+                                    새 폴더 만들기
+                                </a>
+                            </li>
+                        </ul>
+                    )}
                 </li>
+                <li className={`home ${activeMenu === 'home' ? 'active' : ''}`}><a href="#!">홈</a></li>
+                <li className={`drive ${activeMenu === 'drive' ? 'active' : ''}`}><a href="#!">드라이브</a></li>
+                <li className={`mypage ${activeMenu === 'mypage' ? 'active' : ''}`}><a href="#!">마이페이지</a></li>
+                <li className={`group ${activeMenu === 'group' ? 'active' : ''}`}><a href="#!">그룹</a></li>
+                <li className={`trash ${activeMenu === 'trash' ? 'active' : ''}`}><a href="#!">휴지통</a></li>
             </ul>
+            {showFileUploader && <FileUploader />}
+            {showFolderCreator && <FolderCreator />}
         </div>
-
-        // </div>
-        // </div>
     );
 }
+
 function Topbar() {
     return (
         <div>
             <nav class="navbar navbar-expand-lg ">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#!">KHUBox</a>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <form class="d-flex ms-auto p-2">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button
-                                class="btn btn-success"
-                                type="submit"
-                            >
-                                Search</button>
-                        </form>
-                        <div class="personCircle">
-                            <button><BsPersonCircle size="32" color="#636363" /></button></div>
-                    </div>
-                </div>
+                <a class="navbar-brand" href="#!">KHUBox</a>
+                <SearchFile />
             </nav>
         </div>
     );

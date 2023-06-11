@@ -3,6 +3,12 @@
 } */
 * {
     font-size: 20px;
+
+}
+
+.filePage {
+    margin: 100px;
+
 }
 
 .fileTitle {
