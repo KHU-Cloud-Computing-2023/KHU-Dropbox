@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff2be5d5-347b-4176-891a-d36f29b67c7c" name="변경" comment="변경">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/React/khubox/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +36,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2PXxyDsZ0rHQ6TBAZWWuDhZgHaQ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

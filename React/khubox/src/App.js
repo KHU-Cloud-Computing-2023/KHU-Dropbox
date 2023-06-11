@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
@@ -13,11 +13,12 @@ function App() {
 
   useEffect(() => {
     fetch('/api/hello')
-        .then(response => response.text())
-        .then(message => {
-          setMessage(message);
-        });
-  },[])
+      .then(response => response.text())
+      .then(message => {
+        setMessage(message);
+      });
+  }, [])
+
   return (
     <Router>
       <h1 className="App-title">{message}</h1>
@@ -25,11 +26,13 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/files" element={<Files />} />
-        <Route path="/uploader" element={<FileUploader />} />
         <Route path="/folder/:folderName" element={<Files />} />
-        <Route path="/folder" element={<FolderCreator />}/>
+        <Route path="/folder" element={<FolderCreator />} />
         <Route path="GroupPage" element={<GroupPage />} />
         <Route path="/GroupPage/:groupId" element={<GroupDetailsPage />} />
+
+        {/* <Route path="/uploader" element={<FileUploader />} /> */}
+        {/* <Route path="/SearchFile" element={<SearchFile />} /> */}
       </Routes>
     </Router>
   );
