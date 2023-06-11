@@ -4,7 +4,7 @@ import "../css/Login.css";
 
 function LogIn() {
     const navigate = useNavigate();
-    const [id, setId] = useState("");
+    const [loginId, setId] = useState("");
     const [password, setPassword] = useState("");
 
     const handleIdChange = (e) => {
@@ -20,9 +20,9 @@ function LogIn() {
         // 로그인 성공 시 메인 페이지로 이동하도록
         // 추후 서버에서 api를 받아서 처리하는 부분도 추가해야함
         e.preventDefault();
-        console.log(id, password);
+        console.log(loginId, password);
         try {
-            if (id === "")
+            if (loginId === "")
             {
                 return alert("ID를 입력해주세요");
             }
@@ -33,8 +33,9 @@ function LogIn() {
             const response = await fetch('/login', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({id, password})
+                body: JSON.stringify({loginId, password})
             });
+            console.log(JSON.stringify({loginId, password}))
             if (response.ok) {
                 navigate('/files'); // 이동할 페이지 수정해야함
             }
@@ -72,7 +73,7 @@ function LogIn() {
                         <input
                             type="text"
                             id="id"
-                            value={id}
+                            value={loginId}
                             placeholder="ID"
                             className="id"
                             onChange={handleIdChange}
