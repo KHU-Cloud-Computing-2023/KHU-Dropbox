@@ -91,6 +91,7 @@ function SignUp() {
       .catch((error) => {
         console.error('Error:', error);
       });
+
   }
 
 
@@ -114,6 +115,7 @@ function SignUp() {
   // };
 
   return (
+
     <div className="signup">
       <div className="title">
         KHUBox
@@ -173,6 +175,7 @@ function SignUp() {
               placeholder="Mobile" {...register('mobile')}
           />
           {errors.mobile && <p class="error">{errors.mobile.message}</p>} */}
+
         <button
           type="submit"
           disabled={Object.keys(errors).length > 0 || !watch()}

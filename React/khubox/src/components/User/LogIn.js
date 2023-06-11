@@ -22,6 +22,7 @@ function LogIn() {
         e.preventDefault();
         console.log(loginId, password);
         try {
+
             if (loginId === "") {
                 return alert("ID를 입력해주세요");
             }
@@ -30,6 +31,7 @@ function LogIn() {
             }
             const response = await fetch('/login', {
                 method: 'POST',
+
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ loginId, password })
             });
@@ -65,6 +67,7 @@ function LogIn() {
             <div class="title">KHUBox</div>
             <form onSubmit={handleSubmit} class="loginForm">
                 <div class="loginInput">
+
                     <input
                         type="text"
                         id="id"
@@ -80,7 +83,7 @@ function LogIn() {
                         placeholder="Password"
                         className="password"
                         onChange={handlePasswordChange} />
-                </div >
+                </div>
                 <button type="submit" class="loginClick">Login</button>
             </form >
             <p>Don't have an account? <a href="/SignUp" onClick={handleSignupClick}>Sign up</a></p>
