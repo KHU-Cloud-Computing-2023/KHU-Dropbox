@@ -57,8 +57,10 @@ const FolderCreator = ({ addFolder }) => {
           value={folderName}
           onChange={handleInputChange}
           placeholder="Folder Name"
+          className="folderInput"
         />
-        <button type="submit">Create Folder</button>
+        {/* button 없이 엔터로 처리할 수 있도록 수정 */}
+        <button type="submit">Create</button>
       </form>
       {/*<div className="folder-list">*/}
       {/*  {folders.map((folder) => (*/}

@@ -6,25 +6,15 @@ import FolderCreator from '../Files/FolderCreator';
 import '../../css/Files.css';
 import { BiDotsVerticalRounded, BiFolder } from 'react-icons/bi';
 import { BsFileEarmark } from "react-icons/bs";
-import { BsDownload } from "react-icons/bs";
+import { BsDownload, BsFolder2 } from "react-icons/bs";
 
 function FileLists({ files }) {
 
     const tmpfiles = [
-        { name: "homePage.txt", file: "1.png" },
-        { name: "HelloWorld.txt", file: "2.png" },
-        { name: "helloworld.txt", file: "3.png" },
-        { name: "Untitled.py", file: "4.png" },
-        { name: "CloudComputing.js", file: "5.png" },
-        { name: "hello.pdf", file: "6.png" }
+        { name: "CloudComputing", file: "1.png" },
+        { name: "CapstonDesign", file: "2.png" },
+        { name: "FSSN", file: "3.png" },
     ]
-
-    const downloadFile = (filename) => {
-        // 파일 다운로드 링크 생성
-        const fileUrl = `${process.env.REACT_APP_API_BASE_URL}/api/files/download/${filename}`;
-        // 다운로드 링크 클릭
-        window.open(fileUrl, '_blank');
-    };
 
     return (
         <table className="table">
@@ -33,7 +23,6 @@ function FileLists({ files }) {
                     <th scope="col"></th>
                     <th scope="col">Name</th>
                     <th scope="col">Modified</th>
-                    <th scope="col">Options</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,18 +30,13 @@ function FileLists({ files }) {
                 {tmpfiles.map((file, index) => (
                     <tr key={index + 1}>
                         <th scope="row">
-                            <BsFileEarmark size="30" />
+                            <BsFolder2 size="32" />
                         </th>
                         <td>
                             {/* 상세 페이지로 이동하게 처리해야함 */}
                             <a href="/#">{file.name}</a>
                         </td>
                         <td>2023.01.01</td>
-                        <td>
-                            <button onClick={downloadFile}>
-                                <BsDownload />
-                            </button>
-                        </td>
                     </tr>
                 ))}
                 {/*/!* 폴더 행 렌더링 *!/*/}
@@ -78,7 +62,7 @@ function FileLists({ files }) {
     );
 }
 
-const Files = () => {
+const Folders = () => {
     const [folders, setFolders] = useState([]);
     const [files, setFiles] = useState([]);
     const location = useLocation();
@@ -93,26 +77,18 @@ const Files = () => {
         setFolders((prevFolders) => [...prevFolders, folder]);
     };
 
-    const addFile = (file) => {
-        setFiles((prevFiles) => [...prevFiles, file]);
-    };
-
-    const navigateBack = () => {
-        window.history.back();
-    };
-
     return (
         <>
             <NavBar />
             <div className="filePage">
                 <div className="fileTitle">
-                    <h1>Files</h1>
-                    <p className="currentLocation">Current Location: {`Files/${folderName}`}</p>
-                    {/*{folderName === '' && (*/}
-                    {/*    <div className="folderCreatorContainer">*/}
-                    {/*        <FolderCreator addFolder={addFolder} />*/}
-                    {/*    </div>*/}
-                    {/*)}*/}
+                    <h1>Folders</h1>
+                    <p className="currentLocation">Current Location: {`Folder/${folderName}`}</p>
+                    {folderName === '' && (
+                        < div className="folderCreatorContainer">
+                            <FolderCreator addFolder={addFolder} />
+                        </div>
+                    )}
                 </div>
                 <FileLists folders={folders} files={files} />
             </div>
@@ -120,4 +96,4 @@ const Files = () => {
     );
 };
 
-export default Files;
+export default Folders;

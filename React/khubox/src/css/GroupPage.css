@@ -2,12 +2,14 @@
 
 .grouppage {
   width: 60%;
-    margin: 8rem 19rem 0;
+  margin: 10rem 19rem 0;
 }
+
 .header {
   display: flex;
   align-items: center;
 }
+
 h1 {
   font-size: 36px;
   font-weight: bold;
@@ -31,23 +33,24 @@ h1 {
 /* JoinedGroups styles */
 .joinedgroups {
   background-color: #f5f5f5;
-  
+
 }
 
 .joinedgroups table {
-  width: 100%; 
+  width: 100%;
 }
 
-.joinedgroups th, .joinedgroups td {
-  text-align: center; 
+.joinedgroups th,
+.joinedgroups td {
+  text-align: center;
 }
 
 .joinedgroups th {
-  vertical-align: middle; 
+  vertical-align: middle;
 }
 
 .joinedgroups p {
-  margin: 0; 
+  margin: 0;
 }
 
 /* InviteForm styles */

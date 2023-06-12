@@ -1,6 +1,6 @@
 .bd-sidebar {
     position: fixed;
-    top: 10rem;
+    top: 8rem;
     left: 3rem;
     z-index: 1000;
     height: calc(100vh - 4rem);
@@ -16,7 +16,7 @@
 
 .bd-sidebar .nav>li>a {
     display: block;
-    padding: .75rem 1.5rem;
+    padding: 1rem 1rem;
     font-size: 25px;
     font-weight: 500;
     color: #4D37A5;
@@ -32,7 +32,8 @@
 .navbar {
     position: fixed;
     width: 100%;
-    top: 1.5rem;
+    top: 0rem;
+    padding: 1.5rem;
     background-color: #fff;
 }
 
@@ -41,7 +42,7 @@
     color: #4D37A5;
     font-size: 50px;
     font-weight: 900;
-    padding-left: 3rem;
+    padding-left: 1.75rem;
 }
 
 .btn-success {
@@ -64,8 +65,23 @@ button {
     border: none;
 }
 
-.search-input{
+.search-input {
     border-radius: 50px;
-    margin-left:3rem;
-    height:60px;
+    margin-left: 3rem;
+    height: 60px;
+}
+
+.upload-options {
+    list-style: none;
+    padding: 15px;
+    margin: 0;
+}
+
+.upload-options li {
+    margin-bottom: 10px;
+}
+
+.upload-options li a {
+    color: inherit;
+    text-decoration: none;
 }
