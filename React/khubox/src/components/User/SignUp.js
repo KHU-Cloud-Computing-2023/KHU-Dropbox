@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -5,8 +6,9 @@ import "../../css/SignUp.css";
 
 
 function SignUp() {
+  const navigate = useNavigate();
   const formSchema = yup.object({
-    id: yup
+    loginId: yup
       .string()
       .required('영문, 숫자포함 4자리를 입력해주세요.')
       .min(6, '최소 4자 이상 가능합니다')
@@ -46,14 +48,14 @@ function SignUp() {
     //   /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
     //   '올바른 형식으로 다시 입력해주세요.'
     // ),
-    mobile: yup
-      .string()
-      .required('010-xxxx-xxxx 형식으로 번호를 입력해주세요.')
-      .matches(
-        /^[0-9]{3}[-]+[0-9]{4}[-]+[0-9]{4}$/,
-        '올바른 형식으로 다시 입력해주세요.'
-      ),
-    // .mobile('형식이 다릅니다.')
+    // mobile: yup
+    //   .string()
+    //   .required('010-xxxx-xxxx 형식으로 번호를 입력해주세요.')
+    //   .matches(
+    //     /^[0-9]{3}[-]+[0-9]{4}[-]+[0-9]{4}$/,
+    //     '올바른 형식으로 다시 입력해주세요.'
+    //   ),
+    // // .mobile('형식이 다릅니다.')
   })
 
   const {
@@ -67,17 +69,22 @@ function SignUp() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    fetch('/api/signup', { //api end-point, 서버구현 후 수정
+    const { passwordConfirm, ...requestData } = data;
+    console.log(requestData);
+    fetch('/auth/signup', { //api end-point, 서버구현 후 수정
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(requestData)
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
+      .then(response => {
+        if (response.ok) {
+          navigate('/login');
+        }
+      })
+      .then(requestData => {
+        console.log('Success:', requestData);
         // 추후 api통신을 통해 아이디 중복 검사 로직 추가 예정
       })
       .catch((error) => {
@@ -93,11 +100,11 @@ function SignUp() {
       <form className="signup-form" onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
-          name="id"
+          name="loginId"
           class="id"
-          placeholder="ID" {...register('id')}
+          placeholder="ID" {...register('loginId')}
         />
-        {errors.id && <p class="error">{errors.id.message}</p>}
+        {errors.loginId && <p class="error">{errors.loginId.message}</p>}
         <input
           type="password"
           name="password"
@@ -138,13 +145,13 @@ function SignUp() {
           placeholder="Email" {...register('email')}
         />
         {errors.email && <p class="error">{errors.email.message}</p>}
-        <input
+        {/* <input
           type="text"
           name="mobile"
           class="mobile"
           placeholder="Mobile" {...register('mobile')}
         />
-        {errors.mobile && <p class="error">{errors.mobile.message}</p>}
+        {errors.mobile && <p class="error">{errors.mobile.message}</p>} */}
         <button
           type="submit"
           disabled={Object.keys(errors).length > 0 || !watch()}

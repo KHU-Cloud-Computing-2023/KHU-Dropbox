@@ -29,7 +29,8 @@ function LogIn() {
             else if (password === "") {
                 return alert("Password를 입력해주세요");
             }
-            const response = await fetch('/login', {
+
+            const response = await fetch('/auth/login', {
                 method: 'POST',
 
                 headers: { 'Content-Type': 'application/json' },
