@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import NavBar from '../Navbar';
 import '../../css/Files.css';
 
@@ -21,20 +21,20 @@ function FileLists({ files }) {
         // 다운로드 링크 클릭
         const fileUrl = `/files/download?fileKey=${root_folder}/${fileKey}`;
         fetch(fileUrl)
-        .then(response => response.blob())
-        .then(blob => {
-            const downloadUrl = URL.createObjectURL(blob);
+            .then(response => response.blob())
+            .then(blob => {
+                const downloadUrl = URL.createObjectURL(blob);
 
-            const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.setAttribute('download', fileKey);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.setAttribute('download', fileKey);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     };
 
     const handleShowFileDetails = (file) => {
@@ -64,7 +64,6 @@ function FileLists({ files }) {
                             <BsFileEarmark size="30" />
                         </th>
                         <td>
-                            {/* 상세 페이지로 이동하게 처리해야함 */}
                             <button onClick={() => handleShowFileDetails(file)}>
                                 {index === 0 ? file : file.split('/')[1]}
                             </button>
@@ -119,7 +118,6 @@ function FileLists({ files }) {
 const Files = () => {
     const [folders, setFolders] = useState([]);
     const [files, setFiles] = useState([]);
-    const location = useLocation();
     const params = useParams();
     const folderName = params.folderName || '';
 
@@ -163,7 +161,7 @@ const Files = () => {
 
     return (
         <>
-            <NavBar />
+            <NavBar tag="drive" />
             <div className="filePage">
                 <div className="fileTitle">
                     <h1>Files</h1>

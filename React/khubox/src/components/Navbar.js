@@ -6,9 +6,9 @@ import FileUploader from './Files/FileUploader';
 import FolderCreator from './Files/FolderCreator';
 import SearchFile from './Files/SearchFile';
 
-function Sidebar() {
+function Sidebar({ tag }) {
     const [showUploader, setShowUploader] = useState(false);
-    const [activeMenu, setActiveMenu] = useState(null);
+    // const [activeMenu, setActiveMenu] = useState(null);
     const [showFileUploader, setShowFileUploader] = useState(false);
     const [showFolderCreator, setShowFolderCreator] = useState(false);
 
@@ -22,14 +22,10 @@ function Sidebar() {
         setShowFileUploader(!showFileUploader);
     }
 
-    const handleFolderCreatorToggle = () => {
-        setShowFolderCreator(!showFolderCreator);
-    };
-
     return (
         <div class="col-2 row- bd-sidebar">
             <ul class="nav">
-                <li className={`button ${activeMenu === 'button' ? 'active' : ''}`}>
+                <li className="active">
                     <button
                         className="btn btn-success upload"
                         type="submit"
@@ -39,24 +35,15 @@ function Sidebar() {
                     </button>
                     {showUploader && (
                         <ul className="upload-options">
-                            <li>
-                                <a href="#!" onClick={handleFileUploaderToggle}>
-                                    파일 업로드
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/folders">
-                                    새 폴더 만들기
-                                </a>
-                            </li>
+                            <li><a href="#!" onClick={handleFileUploaderToggle}>파일 업로드</a></li>
+                            <li><a href="/folders"> 새 폴더 만들기 </a></li>
                         </ul>
                     )}
                 </li>
-                {/* <li className={`home ${activeMenu === 'home' ? 'active' : ''}`}><a href="#!">홈</a></li> */}
-                <li className={`drive ${activeMenu === 'drive' ? 'active' : ''}`}><a href="/files">내 드라이브</a></li>
-                <li className={`mypage ${activeMenu === 'mypage' ? 'active' : ''}`}><a href="/mypage">마이페이지</a></li>
-                <li className={`group ${activeMenu === 'group' ? 'active' : ''}`}><a href="/GroupPage">그룹</a></li>
-                <li className={`trash ${activeMenu === 'trash' ? 'active' : ''}`}><a href="/trash">휴지통</a></li>
+                <li className={`menu ${tag === "drive" ? "highlight" : ""}`}><a href="/files">내 드라이브</a></li>
+                <li className={`menu ${tag === "mypage" ? "highlight" : ""}`}><a href="/mypage">마이페이지</a></li>
+                <li className={`menu ${tag === "grouppage" ? "highlight" : ""}`}><a href="/GroupPage">그룹</a></li>
+                <li className={`menu ${tag === "trash" ? "highlight" : ""}`}><a href="/trash">휴지통</a></li>
             </ul>
             {showFileUploader && <FileUploader />}
             {showFolderCreator && <FolderCreator />}
@@ -75,11 +62,11 @@ function Topbar() {
     );
 }
 
-function NavBar() {
+function NavBar({ tag }) {
     return (
         <>
             <Topbar />
-            <Sidebar />
+            <Sidebar tag={tag} />
         </>
     );
 }

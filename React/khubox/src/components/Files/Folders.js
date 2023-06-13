@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import NavBar from '../Navbar';
 import FolderCreator from '../Files/FolderCreator';
 import '../../css/Files.css';
 
-import FileUploader from '../Files/FileUploader';
+// import FileUploader from '../Files/FileUploader';
 // import { BiDotsVerticalRounded, BiFolder } from 'react-icons/bi';
-import { BsFileEarmark } from "react-icons/bs";
-import { BsDownload, BsFolder2 } from "react-icons/bs";
+// import { BsFileEarmark } from "react-icons/bs";
+import { BsFolder2 } from "react-icons/bs";
 
 function FileLists({ files }) {
 

@@ -3,10 +3,9 @@ import NavBar from '../Navbar';
 
 const Trash = () => {
 
-
     return (
         <>
-            <NavBar />
+            <NavBar tag="trash" />
         </>
     );
 };

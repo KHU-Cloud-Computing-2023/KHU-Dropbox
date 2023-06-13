@@ -62,7 +62,7 @@ function GroupPage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar tag="grouppage" />
       <div className='grouppage'>
         <div className="header">
           <h1>Groups</h1>

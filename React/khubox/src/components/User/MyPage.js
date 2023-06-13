@@ -6,7 +6,7 @@ const MyPage = () => {
 
     return (
         <>
-            <NavBar />
+            <NavBar tag="mypage" />
         </>
     );
 };
