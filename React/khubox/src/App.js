@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignUp from './components/User/SignUp';
 import LogIn from './components/User/LogIn';
+import MyPage from './components/User/MyPage';
 
 import Files from './components/Files/Files';
 import Folders from './components/Files/Folders';
 import Trash from './components/Files/Trash';
 import FolderCreator from './components/Files/FolderCreator';
+
 import GroupPage from './components/Group/GroupPage';
 import GroupDetailsPage from './components/Group/GroupDetailsPage';
 
@@ -28,6 +30,7 @@ function App() {
         {/* User */}
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/mypage" element={<MyPage />} />
 
         {/* Files */}
         <Route path="/files" element={<Files />} />

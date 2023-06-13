@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import NavBar from '../Navbar';
-import FileUploader from '../Files/FileUploader';
-import FolderCreator from '../Files/FolderCreator';
 import '../../css/Files.css';
-import { BiDotsVerticalRounded, BiFolder } from 'react-icons/bi';
+
 import { BsFileEarmark } from "react-icons/bs";
 import { BsDownload } from "react-icons/bs";
 
-function FileLists({ files }) {
 
-    // const tmpfiles = [
-    //     { name: "homePage.txt", file: "1.png" },
-    //     { name: "HelloWorld.txt", file: "2.png" },
-    //     { name: "helloworld.txt", file: "3.png" },
-    //     { name: "Untitled.py", file: "4.png" },
-    //     { name: "CloudComputing.js", file: "5.png" },
-    //     { name: "hello.pdf", file: "6.png" }
-    // ]
+function FileLists({ files }) {
+    const [showFileDetails, setShowFileDetails] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
+
     // wow123/file.txt
     const downloadFile = async (fileKey) => {
         console.log(window.sessionStorage.getItem("id"));
@@ -32,6 +25,15 @@ function FileLists({ files }) {
         link.setAttribute('filelink', fileKey);
         link.setAttribute('type', 'application/json');
         link.click();
+    };
+
+    const handleShowFileDetails = (file) => {
+        setSelectedFile(file.split('/')[1]);
+        setShowFileDetails(true);
+    };
+
+    const handleHideFileDetails = () => {
+        setShowFileDetails(null);
     };
 
     return (
@@ -53,7 +55,9 @@ function FileLists({ files }) {
                         </th>
                         <td>
                             {/* 상세 페이지로 이동하게 처리해야함 */}
-                            <a href="/#">{index === 0 ? file : file.split('/')[1]}</a>
+                            <button onClick={() => handleShowFileDetails(file)}>
+                                {index === 0 ? file : file.split('/')[1]}
+                            </button>
                         </td>
                         <td>{file.modified}</td>
                         <td>
@@ -67,6 +71,7 @@ function FileLists({ files }) {
                         </td>
                     </tr>
                 ))}
+
                 {/*/!* 폴더 행 렌더링 *!/*/}
                 {/*{folders.map((folder, index) => (*/}
                 {/*    <tr key={index + 1 + files.length}>*/}
@@ -85,8 +90,19 @@ function FileLists({ files }) {
                 {/*        <td><BiDotsVerticalRounded /></td>*/}
                 {/*    </tr>*/}
                 {/*))}*/}
+                <div className={`overlay ${showFileDetails !== null ? 'show' : ''}`} onClick={handleHideFileDetails}>
+                    <div class="file-details">
+                        <h5>{selectedFile}</h5>
+                        <p>파일 상세 내용 출력해야함</p>
+                        <div>
+                            <button className="delete">삭제</button>
+                            <button className="update">수정</button>
+                        </div>
+                    </div>
+                </div>
             </tbody>
-        </table>
+
+        </table >
     );
 }
 
@@ -101,24 +117,39 @@ const Files = () => {
         fetchFiles();
     }, []);
 
+    // detail 창 esc로 종료
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                const overlay = document.querySelector('.overlay');
+                overlay.classList.remove('show');
+            }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
+
     const fetchFiles = () => {
         fetch('/files/file')
-        .then(response => response.json())
-        .then(data => setFiles(data))
-        .catch(error => console.log(error));
+            .then(response => response.json())
+            .then(data => setFiles(data))
+            .catch(error => console.log(error));
     }
 
-    const addFolder = (folder) => {
-        setFolders((prevFolders) => [...prevFolders, folder]);
-    };
+    // const addFolder = (folder) => {
+    //     setFolders((prevFolders) => [...prevFolders, folder]);
+    // };
 
-    const addFile = (file) => {
-        setFiles((prevFiles) => [...prevFiles, file]);
-    };
+    // const addFile = (file) => {
+    //     setFiles((prevFiles) => [...prevFiles, file]);
+    // };
 
-    const navigateBack = () => {
-        window.history.back();
-    };
+    // const navigateBack = () => {
+    //     window.history.back();
+    // };
 
     return (
         <>
@@ -132,6 +163,7 @@ const Files = () => {
                     {/*        <FolderCreator addFolder={addFolder} />*/}
                     {/*    </div>*/}
                     {/*)}*/}
+
                 </div>
                 <FileLists folders={folders} files={files} />
             </div>
