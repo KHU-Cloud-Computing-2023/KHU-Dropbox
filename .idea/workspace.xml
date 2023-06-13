@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff2be5d5-347b-4176-891a-d36f29b67c7c" name="변경" comment="변경">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/React/khubox/src/components/SearchFile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/Files.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/Files.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/LogIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/LogIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/src/css/GroupPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/css/GroupPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/React/khubox/src/css/Navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/css/Navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/Files/Files.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/Files/Files.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/React/khubox/src/components/Files/Folders.js" beforeDir="false" afterPath="$PROJECT_DIR$/React/khubox/src/components/Files/Folders.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +69,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
@@ -179,6 +172,9 @@
       <workItem from="1685774349358" duration="2368000" />
       <workItem from="1685782234183" duration="3945000" />
       <workItem from="1686442258601" duration="11721000" />
+      <workItem from="1686607616668" duration="1004000" />
+      <workItem from="1686608704168" duration="2824000" />
+      <workItem from="1686631152587" duration="1721000" />
     </task>
     <servers />
   </component>
