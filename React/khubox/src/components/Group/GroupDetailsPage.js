@@ -16,16 +16,25 @@ function GroupDetailsPage({ groupId }) {
     // test code, getting file and member information
     const fetchGroupData = async () => {
       try {
-
         // get file information
-        const filesResponse = await fetch(`http://localhost:3000/groups/${groupId}/files`);
+        const filesResponse = await fetch(`/groups/${groupId}/files`);
         const filesData = await filesResponse.json();
         setFiles(filesData);
 
         // get member information
-        const membersResponse = await fetch(`http://localhost:3000/groups/${groupId}/getmembers`);
-        const membersData = await membersResponse.json();
-        setMembers(membersData);
+        // const membersResponse = await fetch(`/groups/${groupId}/getmembers`);
+        // const membersData = await membersResponse.json();
+        // setMembers(membersData);
+
+        // generate fake member data
+        const fakeMembersData = [
+          { id: 1, name: 'Page Clement' },
+          { id: 2, name: 'Christ' },
+          { id: 3, name: 'Arnold' },
+          { id: 4, name: 'Samuel ' },
+          { id: 5, name: 'Pearson' },
+        ];
+        setMembers(fakeMembersData);
       } catch (error) {
         console.error('Error fetching group data:', error);
       }
@@ -34,20 +43,22 @@ function GroupDetailsPage({ groupId }) {
     fetchGroupData();
   }, [groupId]);
 
-  const handleDeleteMember = async (memberId) => {
-    try {
-      // Send a request to the backend to delete the member with memberId
-      await fetch(`http://localhost:3000/groups/${groupId}/getmembers/${memberId}`, {
-        method: 'DELETE',
-      });
+  const handleDeleteMember = (memberId) => {
+    setMembers((prevMembers) =>
+    prevMembers.filter((member) => member.id !== memberId)
+  );
+    
+    // try {
+    //   // Send a request to the backend to delete the member with memberId
+    //   await fetch(`http://localhost:8080/group/${groupId}/getmembers/${memberId}`, {
+    //     method: 'DELETE',
+    //   });
 
-      // Update the members state
-      setMembers((prevMembers) =>
-        prevMembers.filter((member) => member.id !== memberId)
-      );
-    } catch (error) {
-      console.error('Error deleting member:', error);
-    }
+    //   // Update the members state
+    //   setMembers((prevMembers) =>
+    //     prevMembers.filter((member) => member.id !== memberId)
+    //   );
+    // };
   };
 
   return (

@@ -8,7 +8,7 @@ function InviteForm({groupId}) {
     // send invite email here
     // API call to send invite email
     try {
-      const response = await fetch(`http://localhost:3000/groups/${groupId}/addmember`, {
+      const response = await fetch(`http://34.234.42.198:8080/groups/${groupId}/addmember`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
