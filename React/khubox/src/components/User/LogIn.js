@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import '../../css/Login.css';
 
 function LogIn() {
     const navigate = useNavigate();
-    const [loginId, setId] = useState("");
+    const [loginId, setLoginId] = useState("");
     const [password, setPassword] = useState("");
 
+
     const handleIdChange = (e) => {
-        setId(e.target.value);
+        setLoginId(e.target.value);
     };
 
     const handlePasswordChange = (e) => {
@@ -38,6 +39,8 @@ function LogIn() {
             });
             console.log(JSON.stringify({ loginId, password }))
             if (response.ok) {
+                sessionStorage.setItem("id", loginId);
+                
                 navigate('/files'); // 이동할 페이지 수정해야함
             }
             else if (response.status === 400) {

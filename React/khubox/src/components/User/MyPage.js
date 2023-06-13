@@ -1,13 +1,14 @@
 import React from 'react';
 import NavBar from '../Navbar';
 
-const Trash = () => {
+const MyPage = () => {
+
 
     return (
         <>
-            <NavBar tag="trash" />
+            <NavBar tag="mypage" />
         </>
     );
 };
 
-export default Trash;
+export default MyPage;

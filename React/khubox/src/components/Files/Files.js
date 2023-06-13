@@ -1,53 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
-
+import { useParams } from 'react-router-dom';
 import NavBar from '../Navbar';
-import Folders from './Folders';
 import '../../css/Files.css';
 
-import { BsFileEarmark, BsDownload, BsFolder2 } from "react-icons/bs";
-import { BiDotsVerticalRounded } from 'react-icons/bi';
+import { BsFileEarmark } from "react-icons/bs";
+import { BsDownload } from "react-icons/bs";
 
 
+function FileLists({ files }) {
+    const [showFileDetails, setShowFileDetails] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
 
-function FileLists({ files, folders }) {
-    let randomDate = new Date(getRandomDate(new Date(2022, 1, 1), new Date()));
-    let formattedDate = formatDate(randomDate);
+    // wow123/file.txt
+    const downloadFile = async (fileKey) => {
+        console.log(window.sessionStorage.getItem("id"));
+        console.log(fileKey);
+        const root_folder = window.sessionStorage.getItem("id")
+        // const root_folder = "wow123";
 
-    const tmpfiles = [
-        { name: "homePage.txt", file: "1.png" },
-        { name: "HelloWorld.txt", file: "2.png" },
-        { name: "hello.txt", file: "hello.txt" },
-        { name: "Untitled.py", file: "4.png" },
-        { name: "CloudComputing.js", file: "5.png" },
-        { name: "hello.pdf", file: "6.png" }
-    ]
-
-    const tmpfolders = [
-        { name: "CloudComputing", file: "1.png" },
-        { name: "CapstonDesign", file: "2.png" },
-        { name: "FSSN", file: "3.png" },
-    ]
-
-    const downloadFile = (filename) => {
-        // 파일 다운로드 링크 생성
-        const fileUrl = `https://khubox-bucket2.s3.amazonaws.com/${filename}`;
         // 다운로드 링크 클릭
-        window.open(fileUrl, '_blank');
+        const fileUrl = `/files/download?fileKey=${root_folder}/${fileKey}`;
+        fetch(fileUrl)
+            .then(response => response.blob())
+            .then(blob => {
+                const downloadUrl = URL.createObjectURL(blob);
+
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.setAttribute('download', fileKey);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     };
 
-    // 날짜 랜덤 생성 -> 기능 구현 후 삭제 예정
-    function getRandomDate(start, end) {
-        const startDate = start.getTime();
-        const endDate = end.getTime();
+    const handleShowFileDetails = (file) => {
+        setSelectedFile(file.split('/')[1]);
+        setShowFileDetails(true);
+    };
 
-        return new Date(startDate + Math.random() * (endDate - startDate));
-    }
-
-    function formatDate(date) {
-        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-        return date.toLocaleDateString(undefined, options).replace(/\//g, '.');
-    }
+    const handleHideFileDetails = () => {
+        setShowFileDetails(null);
+    };
 
     return (
         <table className="table">
@@ -60,56 +57,61 @@ function FileLists({ files, folders }) {
                 </tr>
             </thead>
             <tbody>
-                {/* 임시로 만든 파일과 폴더 리스트 이용해서 화면에 출력 */}
                 {/* 파일 행 렌더링 */}
-                {tmpfiles.map((file, index) => {
-                    const randomDate = new Date(getRandomDate(new Date(2022, 1, 1), new Date()));
-                    const formattedDate = formatDate(randomDate);
+                {files.map((file, index) => (
+                    <tr key={index + 1}>
+                        <th scope="row">
+                            <BsFileEarmark size="30" />
+                        </th>
+                        <td>
+                            <button onClick={() => handleShowFileDetails(file)}>
+                                {index === 0 ? file : file.split('/')[1]}
+                            </button>
+                        </td>
+                        <td>{file.modified}</td>
+                        <td>
+                            {/* <button onClick={downloadFile(file.split('/')[1])}>
+                                <BsDownload />
+                            </button> */}
+                            <button onClick={() => downloadFile(file.split('/')[1])}>
+                                <BsDownload />
+                            </button>
+                            {/* <button onClick={() => downloadImage(item.filename)}>다운로드</button> */}
+                        </td>
+                    </tr>
+                ))}
 
-                    return (
-                        <tr key={index + 1}>
-                            <th scope="row">
-                                <BsFileEarmark size="30" />
-                            </th>
-                            <td>
-                                {/* 상세 페이지로 이동하게 처리해야함 */}
-                                <a href="/#">{file.name}</a>
-                            </td>
-                            <td>{formattedDate}</td>
-                            <td>
-                                <button onClick={downloadFile}>
-                                    <BsDownload />
-                                </button>
-                            </td>
-                        </tr>
-                    );
-                })}
-
-                {/* 폴더 행 렌더링 */}
-                {tmpfolders.map((folder, index) => {
-                    randomDate = new Date(getRandomDate(new Date(2022, 1, 1), new Date()));
-                    formattedDate = formatDate(randomDate);
-
-                    return (
-                        <tr key={index + 1}>
-                            <th scope="row">
-                                <BsFolder2 size="32" />
-                            </th>
-                            <td>
-                                {/* 상세 페이지로 이동하게 처리해야함 */}
-                                <a href="/#">{folder.name}</a>
-                            </td>
-                            <td>{formattedDate}</td>
-                            <td>
-                                <button onClick={downloadFile}>
-                                    <BiDotsVerticalRounded />
-                                </button>
-                            </td>
-                        </tr>
-                    );
-                })}
+                {/*/!* 폴더 행 렌더링 *!/*/}
+                {/*{folders.map((folder, index) => (*/}
+                {/*    <tr key={index + 1 + files.length}>*/}
+                {/*        <th scope="row">*/}
+                {/*            /!* 폴더 클릭 시 해당 경로 페이지로 이동 *!/*/}
+                {/*            <Link to={`/folder/${folder.name}`} className="folder-link" >*/}
+                {/*                <div className="folder-icon">*/}
+                {/*                    <BiFolder size="30" />*/}
+                {/*                </div>*/}
+                {/*            </Link>*/}
+                {/*        </th>*/}
+                {/*        <td>*/}
+                {/*            {folder.name}*/}
+                {/*        </td>*/}
+                {/*        <td>2023.01.01</td>*/}
+                {/*        <td><BiDotsVerticalRounded /></td>*/}
+                {/*    </tr>*/}
+                {/*))}*/}
+                <div className={`overlay ${showFileDetails !== null ? 'show' : ''}`} onClick={handleHideFileDetails}>
+                    <div class="file-details">
+                        <h5>{selectedFile}</h5>
+                        <p>파일 상세 내용 출력해야함</p>
+                        <div>
+                            <button className="delete">삭제</button>
+                            <button className="update">수정</button>
+                        </div>
+                    </div>
+                </div>
             </tbody>
-        </table>
+
+        </table >
     );
 }
 
@@ -120,24 +122,46 @@ const Files = () => {
     const folderName = params.folderName || '';
 
     useEffect(() => {
-        console.log(folders);
-    }, [folders]);
+        fetchFiles();
+    }, []);
 
-    const addFolder = (folder) => {
-        setFolders((prevFolders) => [...prevFolders, folder]);
-    };
+    // detail 창 esc로 종료
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === 'Escape') {
+                const overlay = document.querySelector('.overlay');
+                overlay.classList.remove('show');
+            }
+        };
+        document.addEventListener('keydown', handleKeyDown);
 
-    const addFile = (file) => {
-        setFiles((prevFiles) => [...prevFiles, file]);
-    };
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, []);
 
-    const navigateBack = () => {
-        window.history.back();
-    };
+    const fetchFiles = () => {
+        fetch('/files/file')
+            .then(response => response.json())
+            .then(data => setFiles(data))
+            .catch(error => console.log(error));
+    }
+
+    // const addFolder = (folder) => {
+    //     setFolders((prevFolders) => [...prevFolders, folder]);
+    // };
+
+    // const addFile = (file) => {
+    //     setFiles((prevFiles) => [...prevFiles, file]);
+    // };
+
+    // const navigateBack = () => {
+    //     window.history.back();
+    // };
 
     return (
         <>
-            <NavBar />
+            <NavBar tag="drive" />
             <div className="filePage">
                 <div className="fileTitle">
                     <h1>Files</h1>
@@ -147,6 +171,7 @@ const Files = () => {
                     {/*        <FolderCreator addFolder={addFolder} />*/}
                     {/*    </div>*/}
                     {/*)}*/}
+
                 </div>
                 <FileLists folders={folders} files={files} />
             </div>

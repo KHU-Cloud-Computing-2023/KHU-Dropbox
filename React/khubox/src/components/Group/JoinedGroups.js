@@ -3,22 +3,22 @@ import { Link } from 'react-router-dom';
 
 function JoinedGroups({ queryKeyword  }) {
 
-  const [joinedGroups, setGroups] = useState([]);
+  // const [joinedGroups, setGroups] = useState([]);
 
-  useEffect(() => {
-    // API call to get joined groups list
-    fetch(`http://localhost:3000/groups`)
-      .then((res) => res.json())
-      .then((data) => setGroups(data.JoinedGroups))
-      .catch((err) => console.log(err));
-  }, []) ;
+  // useEffect(() => {
+  //   // API call to get joined groups list
+  //   fetch(`http://localhost:8080/groups`)
+  //     .then((res) => res.json())
+  //     .then((data) => setGroups(data.JoinedGroups))
+  //     .catch((err) => console.log(err));
+  // }, []) ;
 
-  //  // test data
-  // const joinedGroups = [
-  //   { name: 'KHU', members: 40 },
-  //   { name: 'CloudCompution_H', members: 5 },
-  //   // Personal Groups list data
-  // ];
+   // test data
+  const joinedGroups = [
+    { name: 'KHU', members: 10 },
+    { name: 'CloudCompution_H', members: 5 },
+    // Personal Groups list data
+  ];
 
   const filteredGroups = queryKeyword
     ? joinedGroups.filter(group => group.name.toLowerCase().includes(queryKeyword.toLowerCase()))

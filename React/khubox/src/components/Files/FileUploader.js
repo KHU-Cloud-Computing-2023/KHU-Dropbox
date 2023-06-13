@@ -1,41 +1,45 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile } from '@fortawesome/free-solid-svg-icons';
 import '../../css/FileUploader.css';
 import { BsFileEarmarkArrowUp } from "react-icons/bs";
 import { BsFileEarmark } from "react-icons/bs";
+
+// import axios from 'axios';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faFile } from '@fortawesome/free-solid-svg-icons';
+
 
 const FileUploader = () => {
     const [files, setFiles] = useState([]);
 
     // 임시 함수
-    const onDrop = (acceptedFiles) => {
-        setFiles([...files, ...acceptedFiles]);
-    };
+    // const onDrop = (acceptedFiles) => {
+    //     setFiles([...files, ...acceptedFiles]);
+    // };
 
     // 서버 request & response 추가된 코드
     // 서버와 연결되지 않고 아래 코드를 실행시키면 아무것도 display되지 않음
-    //   const onDrop = async (acceptedFiles) => {
-    //     try {
-    //         const formData = new FormData();
-    //         acceptedFiles.array.forEach(element => {
-    //             formData.append('files', element);
-    //         });
-    //         const response = await axios.post('/upload', formData, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data',
-    //             },
-    //         });
-
-    //         console.log(response.data);
-
-    //         setFiles([...files, ...acceptedFiles]);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    //   };
+    const onDrop = async (acceptedFiles) => {
+        try {
+            const formData = new FormData();
+            acceptedFiles.forEach((file) => {
+                formData.append('file', file);
+            });
+            await fetch('/files/upload', {
+                method: 'POST',
+                body: formData,
+            });
+            setFiles([...files, ...acceptedFiles]);
+            // console.log(response.data);
+            // const response = await axios.post('/upload', formData, {
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data',
+            //     },
+            // });
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 

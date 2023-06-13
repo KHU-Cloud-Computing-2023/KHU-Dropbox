@@ -32,7 +32,7 @@ function GroupPage() {
 
 
   const createGroup = (groupName) => {
-    return fetch(`http://localhost:3000/groups/${groupName}`, {
+    return fetch(`http://34.234.42.198:8080/groups/makegroup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function GroupPage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar tag="grouppage" />
       <div className='grouppage'>
         <div className="header">
           <h1>Groups</h1>

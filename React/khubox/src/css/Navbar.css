@@ -14,12 +14,22 @@
     margin-top: 1rem;
 }
 
+.menu>a {
+    color: #4D37A5;
+}
+
+.highlight>a {
+    color: #AF9CFB;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
 .bd-sidebar .nav>li>a {
     display: block;
     padding: 1rem 1rem;
     font-size: 25px;
     font-weight: 500;
-    color: #4D37A5;
+    /* color: #4D37A5; */
 }
 
 .bd-sidebar .nav>li>button {
