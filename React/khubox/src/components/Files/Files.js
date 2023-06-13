@@ -22,16 +22,45 @@ function FileLists({ files }) {
     const downloadFile = async (fileKey) => {
         console.log(window.sessionStorage.getItem("id"));
         console.log(fileKey);
-        const root_folder = window.sessionStorage.getItem("id")
+        // const root_folder = window.sessionStorage.getItem("id")
+        const root_folder = "wow123";
 
         // 다운로드 링크 클릭
-        const fileUrl = `http://34.234.42.198:8080/files/download?fileKey=${root_folder}/${fileKey}`;
+        const fileUrl = `/files/download?fileKey=${root_folder}/${fileKey}`;
+        // const fileUrl = `http://34.234.42.198:8080/files/download?fileKey=${root_folder}/${fileKey}`;
+        // console.log(fileUrl);
         // window.open(fileUrl, '_blank');
-        const link = document.createElement('a');
-        link.href = fileUrl;
-        link.setAttribute('filelink', fileKey);
-        link.setAttribute('type', 'application/json');
-        link.click();
+        // const response = await fetch(fileUrl, {
+        //     method: 'Get',
+        // });
+        fetch(fileUrl)
+        .then(response => response.blob())
+        .then(blob => {
+            const downloadUrl = URL.createObjectURL(blob);
+
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.setAttribute('download', fileKey);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+        // console.log(response.blob());
+        // const blob = response.blob()
+        // const downloadUrl = window.URL.createObjectURL(blob);
+        // const link = document.createElement('a');
+        // link.href = downloadUrl;
+        // link.setAttribute('download', 'filename.ext');
+        // document.body.appendChild(link);
+        // link.click();
+        // const link = document.createElement('a');
+        // link.href = fileUrl;
+        // link.setAttribute('id', "wow123");
+        // link.setAttribute('type', 'application/json');
+        // link.click();
     };
 
     return (
