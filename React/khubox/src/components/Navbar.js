@@ -54,7 +54,7 @@ function Sidebar() {
                 </li>
                 {/* <li className={`home ${activeMenu === 'home' ? 'active' : ''}`}><a href="#!">홈</a></li> */}
                 <li className={`drive ${activeMenu === 'drive' ? 'active' : ''}`}><a href="/files">내 드라이브</a></li>
-                <li className={`mypage ${activeMenu === 'mypage' ? 'active' : ''}`}><a href="#!">마이페이지</a></li>
+                <li className={`mypage ${activeMenu === 'mypage' ? 'active' : ''}`}><a href="/mypage">마이페이지</a></li>
                 <li className={`group ${activeMenu === 'group' ? 'active' : ''}`}><a href="/GroupPage">그룹</a></li>
                 <li className={`trash ${activeMenu === 'trash' ? 'active' : ''}`}><a href="/trash">휴지통</a></li>
             </ul>
