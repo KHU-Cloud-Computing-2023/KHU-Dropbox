@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -240,4 +241,40 @@ public class FileService {
 
 		return folderPath;
 	}
+
+
+	public MultipartFile fileToGPT(String fileKey) {
+		S3Object fullObject = null;
+		try {
+			fullObject = s3Client.getObject(bucketName, fileKey);
+			if (fullObject == null) {
+				return null;
+			}
+		} catch (AmazonS3Exception e) {
+			throw new InvalidRequestException("파일이 존재하지 않습니다.");
+		}
+
+		try {
+			S3ObjectInputStream objectInputStream = fullObject.getObjectContent();
+			byte[] bytes = IOUtils.toByteArray(objectInputStream);
+
+			// 파일 이름 설정
+			String fileName = fileKey;
+
+			// 파일의 내용을 MultipartFile 형식으로 변환하여 반환
+			return new MockMultipartFile(fileName, fileName, fullObject.getObjectMetadata().getContentType(), bytes);
+		} catch (IOException e) {
+			log.debug(e.getMessage(), e);
+		} finally {
+			if (fullObject != null) {
+				try {
+					fullObject.close();
+				} catch (IOException e) {
+					log.debug(e.getMessage  (), e);
+				}
+			}
+		}
+		return null;
+	}
+
 }
