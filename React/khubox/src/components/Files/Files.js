@@ -18,12 +18,20 @@ function FileLists({ files }) {
     //     { name: "CloudComputing.js", file: "5.png" },
     //     { name: "hello.pdf", file: "6.png" }
     // ]
+    // wow123/file.txt
+    const downloadFile = async (fileKey) => {
+        console.log(window.sessionStorage.getItem("id"));
+        console.log(fileKey);
+        const root_folder = window.sessionStorage.getItem("id")
 
-    const downloadFile = (filename) => {
-        // 파일 다운로드 링크 생성
-        const fileUrl = `${process.env.REACT_APP_API_BASE_URL}/api/files/download/${filename}`;
         // 다운로드 링크 클릭
-        window.open(fileUrl, '_blank');
+        const fileUrl = `http://34.234.42.198:8080/files/download?fileKey=${root_folder}/${fileKey}`;
+        // window.open(fileUrl, '_blank');
+        const link = document.createElement('a');
+        link.href = fileUrl;
+        link.setAttribute('filelink', fileKey);
+        link.setAttribute('type', 'application/json');
+        link.click();
     };
 
     return (
@@ -49,9 +57,13 @@ function FileLists({ files }) {
                         </td>
                         <td>{file.modified}</td>
                         <td>
-                            <button onClick={downloadFile}>
+                            {/* <button onClick={downloadFile(file.split('/')[1])}>
+                                <BsDownload />
+                            </button> */}
+                            <button onClick={() => downloadFile(file.split('/')[1])}>
                                 <BsDownload />
                             </button>
+                            {/* <button onClick={() => downloadImage(item.filename)}>다운로드</button> */}
                         </td>
                     </tr>
                 ))}

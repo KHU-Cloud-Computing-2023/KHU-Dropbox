@@ -39,6 +39,8 @@ function LogIn() {
             });
             console.log(JSON.stringify({ loginId, password }))
             if (response.ok) {
+                sessionStorage.setItem("id", loginId);
+                
                 navigate('/files'); // 이동할 페이지 수정해야함
             }
             else if (response.status === 400) {
