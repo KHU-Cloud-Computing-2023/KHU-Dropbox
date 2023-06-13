@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import '../../css/Login.css';
 
 function LogIn() {
     const navigate = useNavigate();
-    const [loginId, setId] = useState("");
+    const [loginId, setLoginId] = useState("");
     const [password, setPassword] = useState("");
 
+
     const handleIdChange = (e) => {
-        setId(e.target.value);
+        setLoginId(e.target.value);
     };
 
     const handlePasswordChange = (e) => {
