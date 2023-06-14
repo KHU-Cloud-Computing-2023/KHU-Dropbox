@@ -5,10 +5,12 @@ import com.cloudcomputing.khubox.domain.LoginForm;
 import com.cloudcomputing.khubox.domain.Member;
 import com.cloudcomputing.khubox.service.AuthService;
 import com.cloudcomputing.khubox.service.FileService;
+import com.cloudcomputing.khubox.service.OpenAiService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import com.cloudcomputing.khubox.domain.OpenAiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class FilesController {
 
 	private final FileService fileService;
+	private final OpenAiService openAiService;
 
 
 	@GetMapping("/file")
@@ -41,6 +45,7 @@ public class FilesController {
 
 		return ResponseEntity.ok(fileKeys);
 	}
+
 
 
 	@GetMapping("/upload")
@@ -99,6 +104,27 @@ public class FilesController {
 		}
 	}
 
+	@GetMapping("/summarize")
+	public ResponseEntity<OpenAiResponse> summarize(@RequestParam("fileKey") String fileKey) throws IOException {
+		log.info("Summarize File key={}", fileKey);
+		MultipartFile file = fileService.fileToGPT(fileKey);
+		OpenAiResponse response = openAiService.summarize(file);
+		return ResponseEntity.ok(response);
+	}
 
+	@GetMapping("/translate")
+	public ResponseEntity<OpenAiResponse> translate(@RequestParam("fileKey") String fileKey) throws IOException {
+		log.info("translate File key={}", fileKey);
+		MultipartFile file = fileService.fileToGPT(fileKey);
+		OpenAiResponse response = openAiService.translate(file);
+		return ResponseEntity.ok(response);
+	}
 
+	@PostMapping("/custom")
+	public ResponseEntity<OpenAiResponse> custom(@RequestParam("fileKey") String fileKey, @RequestBody String promp) throws IOException {
+		log.info("translate File key={}", fileKey);
+		MultipartFile file = fileService.fileToGPT(fileKey);
+		OpenAiResponse response = openAiService.custom(file, promp);
+		return ResponseEntity.ok(response);
+	}
 }
