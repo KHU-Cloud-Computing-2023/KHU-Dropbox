@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import DownloadTxt from './DownloadTxt';
 import { useParams } from 'react-router-dom';
 import NavBar from '../Navbar';
 import '../../css/Files.css';
@@ -54,6 +55,7 @@ function FileLists({ files }) {
                     <th scope="col">Name</th>
                     <th scope="col">Modified</th>
                     <th scope="col">Options</th>
+                    <th scope="col">ChatGPT</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,6 +79,9 @@ function FileLists({ files }) {
                                 <BsDownload />
                             </button>
                             {/* <button onClick={() => downloadImage(item.filename)}>다운로드</button> */}
+                        </td>
+                        <td>
+                            <DownloadTxt text="Hello, World!" filename="summery.txt"/>
                         </td>
                     </tr>
                 ))}

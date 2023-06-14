@@ -13,19 +13,9 @@ import GroupPage from './components/Group/GroupPage';
 import GroupDetailsPage from './components/Group/GroupDetailsPage';
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch('/api/hello')
-      .then(response => response.text())
-      .then(message => {
-        setMessage(message);
-      });
-  }, [])
 
   return (
     <Router>
-      {/* <h1 className="App-title">{message}</h1> */}
       <Routes>
         {/* User */}
         <Route path="/login" element={<LogIn />} />
