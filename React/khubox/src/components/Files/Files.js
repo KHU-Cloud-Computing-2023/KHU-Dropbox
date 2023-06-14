@@ -7,7 +7,6 @@ import '../../css/Files.css';
 import { BsFileEarmark } from "react-icons/bs";
 import { BsDownload } from "react-icons/bs";
 
-
 function FileLists({ files }) {
     const [showFileDetails, setShowFileDetails] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -38,6 +37,18 @@ function FileLists({ files }) {
             });
     };
 
+    function getRandomDate(start, end) {
+        const startDate = start.getTime();
+        const endDate = end.getTime();
+
+        return new Date(startDate + Math.random() * (endDate - startDate));
+    }
+
+    function formatDate(date) {
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        return date.toLocaleDateString(undefined, options).replace(/\//g, '.');
+    }
+
     const handleShowFileDetails = (file) => {
         setSelectedFile(file.split('/')[1]);
         setShowFileDetails(true);
@@ -60,54 +71,36 @@ function FileLists({ files }) {
             </thead>
             <tbody>
                 {/* 파일 행 렌더링 */}
-                {files.map((file, index) => (
-                    <tr key={index + 1}>
-                        <th scope="row">
-                            <BsFileEarmark size="30" />
-                        </th>
-                        <td>
-                            <button onClick={() => handleShowFileDetails(file)}>
-                                {index === 0 ? file : file.split('/')[1]}
-                            </button>
-                        </td>
-                        <td>{file.modified}</td>
-                        <td>
-                            {/* <button onClick={downloadFile(file.split('/')[1])}>
-                                <BsDownload />
-                            </button> */}
-                            <button onClick={() => downloadFile(file.split('/')[1])}>
-                                <BsDownload />
-                            </button>
-                            {/* <button onClick={() => downloadImage(item.filename)}>다운로드</button> */}
-                        </td>
-                        <td>
-                            <DownloadTxt text="Hello, World!" filename="summery.txt"/>
-                        </td>
-                    </tr>
-                ))}
+                {files.map((file, index) => {
+                    const randomDate = new Date(getRandomDate(new Date(2022, 1, 1), new Date()));
+                    const formattedDate = formatDate(randomDate);
+                    return (
+                        <tr key={index + 1}>
+                            <th scope="row">
+                                <BsFileEarmark size="30" />
+                            </th>
+                            <td>
+                                <button onClick={() => handleShowFileDetails(file)}>
+                                    {index === 0 ? file : file.split('/')[1]}
+                                </button>
+                            </td>
+                            <td>{formattedDate}</td>
+                            <td>
+                                <button onClick={() => downloadFile(file.split('/')[1])}>
+                                    <BsDownload />
+                                </button>
+                            </td>
+                            <td>
+                                <DownloadTxt text="Hello, World!" filename="summery.txt" />
+                            </td>
+                        </tr>
+                    );
+                })}
 
-                {/*/!* 폴더 행 렌더링 *!/*/}
-                {/*{folders.map((folder, index) => (*/}
-                {/*    <tr key={index + 1 + files.length}>*/}
-                {/*        <th scope="row">*/}
-                {/*            /!* 폴더 클릭 시 해당 경로 페이지로 이동 *!/*/}
-                {/*            <Link to={`/folder/${folder.name}`} className="folder-link" >*/}
-                {/*                <div className="folder-icon">*/}
-                {/*                    <BiFolder size="30" />*/}
-                {/*                </div>*/}
-                {/*            </Link>*/}
-                {/*        </th>*/}
-                {/*        <td>*/}
-                {/*            {folder.name}*/}
-                {/*        </td>*/}
-                {/*        <td>2023.01.01</td>*/}
-                {/*        <td><BiDotsVerticalRounded /></td>*/}
-                {/*    </tr>*/}
-                {/*))}*/}
                 <div className={`overlay ${showFileDetails !== null ? 'show' : ''}`} onClick={handleHideFileDetails}>
                     <div class="file-details">
                         <h5>{selectedFile}</h5>
-                        <p>파일 상세 내용 출력해야함</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat aliquid similique, ab et quibusdam dolorem at pariatur deserunt soluta odit reprehenderit, sapiente ducimus rem. Quia hic ab culpa distinctio possimus.</p>
                         <div>
                             <button className="delete">삭제</button>
                             <button className="update">수정</button>

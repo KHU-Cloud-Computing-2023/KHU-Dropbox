@@ -4,9 +4,6 @@ import NavBar from '../Navbar';
 import FolderCreator from '../Files/FolderCreator';
 import '../../css/Files.css';
 
-// import FileUploader from '../Files/FileUploader';
-// import { BiDotsVerticalRounded, BiFolder } from 'react-icons/bi';
-// import { BsFileEarmark } from "react-icons/bs";
 import { BsFolder2 } from "react-icons/bs";
 
 function FileLists({ files }) {
@@ -34,7 +31,6 @@ function FileLists({ files }) {
                             <BsFolder2 size="32" />
                         </th>
                         <td>
-                            {/* 상세 페이지로 이동하게 처리해야함 */}
                             <a href="/#">{folder.name}</a>
                         </td>
                         <td>2023.01.01</td>

@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../../css/FolderCreator.css';
-// import { BiFolder } from 'react-icons/bi';
-
 
 const FolderCreator = ({ addFolder }) => {
   const [folderName, setFolderName] = useState('');
   const [folders, setFolders] = useState([]);
   const [currentFolderPath, setCurrentFolderPath] = useState('/folder');
-  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setFolderName(e.target.value);
@@ -23,17 +19,10 @@ const FolderCreator = ({ addFolder }) => {
       id: Date.now(),
       name: folderName.trim(),
     };
-    // setFolders([...folders, newFolder]);
     addFolder(newFolder);
     setFolderName('');
   };
 
-  const handleFolderClick = (folderName) => {
-    setCurrentFolderPath(`${currentFolderPath}/${folderName}`);
-    navigate(`/folder/${folderName}`);
-  };
-
-  // Render the contents of the current folder
   const renderFolderContents = () => {
     const folderPath = currentFolderPath.split('/').slice(1);
     const currentFolderName = folderPath[folderPath.length - 1];
@@ -45,7 +34,6 @@ const FolderCreator = ({ addFolder }) => {
     return (
       <div>
         <h2>Current Folder: {currentFolder.name}</h2>
-        {/* Render the contents of the current folder */}
       </div>
     );
   };
@@ -60,24 +48,8 @@ const FolderCreator = ({ addFolder }) => {
           placeholder="Folder Name"
           className="folderInput"
         />
-        {/* button 없이 엔터로 처리할 수 있도록 수정 */}
         <button type="submit">Create</button>
       </form>
-      {/*<div className="folder-list">*/}
-      {/*  {folders.map((folder) => (*/}
-      {/*    <div*/}
-      {/*      key={folder.id}*/}
-      {/*      className="folder-item"*/}
-      {/*      onClick={() => handleFolderClick(folder.name)}*/}
-      {/*    >*/}
-      {/*      <div className="folder-icon">*/}
-      {/*        <BiFolder />*/}
-      {/*      </div>*/}
-      {/*      <div className="folder-name">{folder.name}</div>*/}
-      {/*    </div>*/}
-      {/*  ))}*/}
-      {/*</div>*/}
-      {/*{renderFolderContents()}*/}
     </div>
   );
 };

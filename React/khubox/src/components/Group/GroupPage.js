@@ -1,9 +1,6 @@
 import React, { useState, useRef } from 'react';
-// import { Link } from 'react-router-dom';
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GroupQuery from './GroupQuery';
 import JoinedGroups from './JoinedGroups';
-// import InviteForm from './InviteForm';
 import '../../css/GroupPage.css';
 import Navbar from '../Navbar';
 import imageSrc from '../image9.png';
@@ -18,14 +15,13 @@ function GroupPage() {
     event.preventDefault();
     const newGroupName = newGroupNameRef.current.value;
     try {
-      const response = await createGroup(newGroupName); // create group request
+      const response = await createGroup(newGroupName);
       if (response) {
         const newGroup = { name: newGroupName };
         setJoinedGroups([...joinedGroups, newGroup]);
       }
     } catch (error) {
       console.error('Error creating group:', error);
-      // handle error
     }
     newGroupNameRef.current.value = '';
   };
@@ -86,8 +82,6 @@ function GroupPage() {
         </div>
         <GroupQuery onQuery={handleQuery} />
         <JoinedGroups queryKeyword={queryKeyword} />
-
-        {/* Other */}
       </div>
     </>
   );

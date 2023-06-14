@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Files from "./Files";
 
 function SearchFile({ }) {
     const files = [
@@ -32,7 +31,6 @@ function SearchFile({ }) {
         <>
             <form className="d-flex p-2" onSubmit={handleSearch}>
                 <input className="me-2 search-input" type="search" placeholder="Search" aria-label="Search" onChange={handleInputChange} />
-                {/*<Files files={searchResults}/>*/}
             </form>
         </>
     )

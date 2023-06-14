@@ -8,23 +8,13 @@ function GroupDetailsPage({ groupId }) {
   const [files, setFiles] = useState([]);
   const [members, setMembers] = useState([]);
 
-  // Get file and member information when the component is loaded
   useEffect(() => {
-    // Get file and member information from the backend or other data source based on groupId
-    // Set the files and members states
-
-    // test code, getting file and member information
     const fetchGroupData = async () => {
       try {
         // get file information
         const filesResponse = await fetch(`/groups/${groupId}/files`);
         const filesData = await filesResponse.json();
         setFiles(filesData);
-
-        // get member information
-        // const membersResponse = await fetch(`/groups/${groupId}/getmembers`);
-        // const membersData = await membersResponse.json();
-        // setMembers(membersData);
 
         // generate fake member data
         const fakeMembersData = [
@@ -47,18 +37,6 @@ function GroupDetailsPage({ groupId }) {
     setMembers((prevMembers) =>
       prevMembers.filter((member) => member.id !== memberId)
     );
-
-    // try {
-    //   // Send a request to the backend to delete the member with memberId
-    //   await fetch(`http://localhost:8080/group/${groupId}/getmembers/${memberId}`, {
-    //     method: 'DELETE',
-    //   });
-
-    //   // Update the members state
-    //   setMembers((prevMembers) =>
-    //     prevMembers.filter((member) => member.id !== memberId)
-    //   );
-    // };
   };
 
   return (
@@ -85,26 +63,6 @@ function GroupDetailsPage({ groupId }) {
             ))}
           </tbody>
         </table>
-        {/* <hr />
-        <h3>Members</h3>
-        <hr />
-        <ul>
-          {members.map((member) => (
-            <li key={member.id}>
-              {member.name}
-              <button onClick={() => handleDeleteMember(member.id)}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul> */}
-
-        {/* <h3>Files:</h3>
-        <ul>
-            {files.map((file) => (
-            <li key={file.id}>{file.name}</li>
-            ))}
-        </ul> */}
       </div>
     </>
   );

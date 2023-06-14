@@ -2,22 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function JoinedGroups({ queryKeyword }) {
-
-  // const [joinedGroups, setGroups] = useState([]);
-
-  // useEffect(() => {
-  //   // API call to get joined groups list
-  //   fetch(`http://localhost:8080/groups`)
-  //     .then((res) => res.json())
-  //     .then((data) => setGroups(data.JoinedGroups))
-  //     .catch((err) => console.log(err));
-  // }, []) ;
-
   // test data
   const joinedGroups = [
     { name: 'KHU', members: 10 },
     { name: 'CloudComputing_H', members: 5 },
-    // Personal Groups list data
   ];
 
   const filteredGroups = queryKeyword
