@@ -10,39 +10,33 @@
   align-items: center;
 }
 
-h1 {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  margin-right: 20px;
-}
-
 /* GroupQuery styles */
 .groupquery {
   margin-bottom: 10px;
 }
 
 .groupquery input {
-  width: 200px;
-}
-
-.groupquery button {
-  margin-left: 10px;
+  width: 400px;
+  height: 60px;
 }
 
 /* JoinedGroups styles */
-.joinedgroups {
-  background-color: #f5f5f5;
-
-}
+.joinedgroups {}
 
 .joinedgroups table {
   width: 100%;
+
+}
+
+.joinedgroups thead {
+  border-top: 1px solid #adadad;
+
 }
 
 .joinedgroups th,
 .joinedgroups td {
   text-align: center;
+  border-bottom: 1px solid #adadad;
 }
 
 .joinedgroups th {
@@ -54,16 +48,47 @@ h1 {
 }
 
 /* InviteForm styles */
-.InviteForm {
+/* .InviteForm {
   margin-bottom: 10px;
-}
+} */
+
 
 .InviteForm label {
   display: block;
   font-weight: bold;
 }
 
-.InviteForm input[type="text"],
-.InviteForm input[type="email"] {
-  width: 170px;
+.InviteForm input {
+  width: 400px;
+  height: 60px;
+}
+
+.sendButton {
+  border: 1px solid #adadad;
+  background: #adadad;
+  height: 60px;
+  padding: 0 10px;
+  border-radius: 5px;
+  margin-left: 5px;
+  font-weight: 600;
+  color: #464646;
+  margin-bottom: 0;
+}
+
+.boardButton,
+.chattingButton {
+  font-weight: 700;
+  border: 1px solid #AF9CFB;
+  width: 100px;
+  border-radius: 5px;
+  height: 60px;
+  margin-left: 5px;
+}
+
+a {
+  color: #AF9CFB;
+}
+
+button {
+  background: none;
 }

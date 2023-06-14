@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function InviteForm({groupId}) {
+function InviteForm({ groupId }) {
   const [email, setEmail] = useState('');
 
   const handleSubmit = async (e) => {
@@ -37,11 +37,15 @@ function InviteForm({groupId}) {
   };
 
   return (
-    <div className='InviteForm'>  
-    <form onSubmit={handleSubmit}>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-      <button type="submit">Send Invite</button>
-    </form>
+    <div className='InviteForm'>
+      <form onSubmit={handleSubmit}>
+        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+        <button type="submit" className="sendButton">Send Invite</button>
+        <button className="boardButton">
+          <a href="http://44.216.141.210:8081/">게시판
+          </a></button>
+        <button className="chattingButton"><a href="http://44.216.141.210:8080/">채팅</a></button>
+      </form>
     </div>
   );
 }

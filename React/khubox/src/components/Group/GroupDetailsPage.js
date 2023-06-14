@@ -45,9 +45,9 @@ function GroupDetailsPage({ groupId }) {
 
   const handleDeleteMember = (memberId) => {
     setMembers((prevMembers) =>
-    prevMembers.filter((member) => member.id !== memberId)
-  );
-    
+      prevMembers.filter((member) => member.id !== memberId)
+    );
+
     // try {
     //   // Send a request to the backend to delete the member with memberId
     //   await fetch(`http://localhost:8080/group/${groupId}/getmembers/${memberId}`, {
@@ -65,9 +65,27 @@ function GroupDetailsPage({ groupId }) {
     <>
       <Navbar />
       <div className='GroupDetails'>
-        <h1>Groups</h1>
+        <h1>CloudComputing_H</h1>
         <InviteForm />
-        <hr />
+        <table className="member-table">
+          <thead>
+            <tr>
+              <th>Member Name</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            {members.map((member) => (
+              <tr key={member.id}>
+                <td><p>{member.name}</p></td>
+                <td><button onClick={() => handleDeleteMember(member.id)}>
+                  Delete
+                </button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {/* <hr />
         <h3>Members</h3>
         <hr />
         <ul>
@@ -79,7 +97,7 @@ function GroupDetailsPage({ groupId }) {
               </button>
             </li>
           ))}
-        </ul>
+        </ul> */}
 
         {/* <h3>Files:</h3>
         <ul>

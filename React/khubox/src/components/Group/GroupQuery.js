@@ -15,7 +15,7 @@ function GroupQuery({ onQuery }) {
         onChange={(e) => setKeyword(e.target.value)}
         placeholder="Enter Group Name"
       />
-      <button onClick={handleQuery}>Query</button>
+      <button onClick={handleQuery} className="createButton">Create</button>
     </div>
   );
 }

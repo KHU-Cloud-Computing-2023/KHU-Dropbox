@@ -79,14 +79,13 @@ function GroupPage() {
                   ref={newGroupNameRef}
                   placeholder="Enter Group Name"
                 />
-                <button type="submit">Create Group</button>
+                <button type="submit">Create</button>
               </form>
             </div>
           )}
         </div>
         <GroupQuery onQuery={handleQuery} />
         <JoinedGroups queryKeyword={queryKeyword} />
-
 
         {/* Other */}
       </div>
