@@ -75,6 +75,30 @@ public class OpenAiService {
 		return response;
 	}
 
+	public OpenAiResponse translate(MultipartFile file) throws IOException {
+		String text = readPdf(file);
+
+		OpenAiRequest request = new OpenAiRequest(model,
+				List.of(new Message("user", "translate the following sentences into Korean.\n" + text)),
+				maxCompletions,
+				temperature,
+				maxTokens);
+		OpenAiResponse response = restTemplate.postForObject(apiUrl, request, OpenAiResponse.class);
+		return response;
+	}
+
+	public OpenAiResponse custom(MultipartFile file, String promp) throws IOException {
+		String text = readPdf(file);
+
+		OpenAiRequest request = new OpenAiRequest(model,
+				List.of(new Message("user", promp + "\n" + text)),
+				maxCompletions,
+				temperature,
+				maxTokens);
+		OpenAiResponse response = restTemplate.postForObject(apiUrl, request, OpenAiResponse.class);
+		return response;
+	}
+
 //	public String gpt3Completion(String prompt) throws OpenAIException, IOException {
 //		String apiKey = getOpenAIKey();
 //		OpenAI.apiKey = apiKey;
