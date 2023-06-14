@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const DownloadTxt = ({ text, filename }) => {
+const DownloadTxt = ({ text, filename, buttonName }) => {
+  const [clickButton, setClickButton] = useState(buttonName);
+  
   const handleDownload = () => {
     const element = document.createElement("a");
     const file = new Blob([text], {type: 'text/plain'});
@@ -11,7 +13,7 @@ const DownloadTxt = ({ text, filename }) => {
   }
 
   return (
-    <button onClick={handleDownload}>요약</button>
+    <button onClick={handleDownload}>{clickButton}</button>
   );
 }
 

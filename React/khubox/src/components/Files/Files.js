@@ -10,6 +10,10 @@ import { BsDownload } from "react-icons/bs";
 function FileLists({ files }) {
     const [showFileDetails, setShowFileDetails] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [summeryText, setSummeryText] = useState(null);
+    const [transText, setTransText] = useState(null);
+    const [customText, setCustomText] = useState(null);
+
 
     // wow123/file.txt
     const downloadFile = async (fileKey) => {
@@ -20,6 +24,16 @@ function FileLists({ files }) {
 
         // 다운로드 링크 클릭
         const fileUrl = `/files/download?fileKey=${root_folder}/${fileKey}`;
+        const summeryEndpoint = `/files/summarize?fileKey=${root_folder}/${fileKey}`;
+        const transEndpoint = `/files/translation?fileKey=${root_folder}/${fileKey}`;
+        const customEndpoint = `/files/custom?fileKey=${root_folder}/${fileKey}`;
+
+        fetchText(summeryEndpoint, "summery");
+        fetchText(transEndpoint, "translation");
+        fetchText(customEndpoint, "custom");
+
+
+
         fetch(fileUrl)
             .then(response => response.blob())
             .then(blob => {
@@ -36,6 +50,29 @@ function FileLists({ files }) {
                 console.error(error);
             });
     };
+
+    const fetchText = (textUrl, typeIs) => {
+        fetch(textUrl)
+            .then(response => response.json())
+            .then(data => {
+                const textData = JSON.stringify(data);
+                switch (typeIs) {
+                    case "summery":
+                      setSummeryText(textData);
+                      break;
+                    case "translation":
+                      setTransText(textData);
+                      break;
+                    case "custom":
+                      setCustomText(textData);
+                      break;
+                    default:
+                      // 기본 처리 로직
+                      break;
+                  }
+            })
+            .catch(error => console.log(error));
+    }
 
     function getRandomDate(start, end) {
         const startDate = start.getTime();
@@ -91,7 +128,8 @@ function FileLists({ files }) {
                                 </button>
                             </td>
                             <td>
-                                <DownloadTxt text="Hello, World!" filename="summery.txt" />
+                                <DownloadTxt text={summeryText} filename="summery" buttonName="요약"/>
+                                <DownloadTxt text={transText} filename="translation" buttonName="번역"/>
                             </td>
                         </tr>
                     );
