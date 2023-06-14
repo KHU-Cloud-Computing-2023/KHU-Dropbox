@@ -13,6 +13,8 @@ function FileLists({ files }) {
     const [summeryText, setSummeryText] = useState(null);
     const [transText, setTransText] = useState(null);
     const [customText, setCustomText] = useState(null);
+    const [showQuery, setshowQuery] = useState(null);
+    const [inputValue, setInputValue] = useState('');
 
 
     // wow123/file.txt
@@ -58,18 +60,18 @@ function FileLists({ files }) {
                 const textData = JSON.stringify(data);
                 switch (typeIs) {
                     case "summery":
-                      setSummeryText(textData);
-                      break;
+                        setSummeryText(textData);
+                        break;
                     case "translation":
-                      setTransText(textData);
-                      break;
+                        setTransText(textData);
+                        break;
                     case "custom":
-                      setCustomText(textData);
-                      break;
+                        setCustomText(textData);
+                        break;
                     default:
-                      // 기본 처리 로직
-                      break;
-                  }
+                        // 기본 처리 로직
+                        break;
+                }
             })
             .catch(error => console.log(error));
     }
@@ -94,6 +96,19 @@ function FileLists({ files }) {
     const handleHideFileDetails = () => {
         setShowFileDetails(null);
     };
+
+    const handleShowQuery = (file) => {
+        setSelectedFile(file.split('/')[1]);
+        setshowQuery(true);
+    }
+
+    const handleHideQuery = () => {
+        setshowQuery(null);
+    }
+
+    const handleChange = (e) => {
+        setInputValue(e.target.value);
+    }
 
     return (
         <table className="table">
@@ -128,12 +143,26 @@ function FileLists({ files }) {
                                 </button>
                             </td>
                             <td>
-                                <DownloadTxt text={summeryText} filename="summery" buttonName="요약"/>
-                                <DownloadTxt text={transText} filename="translation" buttonName="번역"/>
+                                <DownloadTxt text={summeryText} filename="summery" buttonName="요약" />
+                                <DownloadTxt text={transText} filename="translation" buttonName="번역" />
+                                <button onClick={() => { handleShowQuery(file) }}>
+                                    질문
+                                </button>
                             </td>
                         </tr>
                     );
                 })}
+
+                <div className={`overlay ${showQuery !== null ? 'showquery' : ''}`}>
+                    <div class="file-query">
+                        <h5>{selectedFile}</h5>
+                        <input type="text" value={inputValue} onChange={handleChange} />
+                        <div>
+                            <button className="send">전송</button>
+                            <button className="close" onClick={handleHideQuery}>닫기</button>
+                        </div>
+                    </div>
+                </div>
 
                 <div className={`overlay ${showFileDetails !== null ? 'show' : ''}`} onClick={handleHideFileDetails}>
                     <div class="file-details">
@@ -152,7 +181,6 @@ function FileLists({ files }) {
 }
 
 const Files = () => {
-    const [folders, setFolders] = useState([]);
     const [files, setFiles] = useState([]);
     const params = useParams();
     const folderName = params.folderName || '';
@@ -209,7 +237,7 @@ const Files = () => {
                     {/*)}*/}
 
                 </div>
-                <FileLists folders={folders} files={files} />
+                <FileLists files={files} />
             </div>
         </>
     );

@@ -71,18 +71,23 @@ td>a {
     /* 초기에는 숨김 상태로 설정 */
 }
 
-.file-details {
+.file-details,
+.file-query {
     width: 700px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: red;
     border-radius: 5px;
     text-align: center;
 }
 
-.file-details>h5 {
+.file-query>input {
+    margin-bottom: 20px;
+}
+
+.file-details>h5,
+.file-query>h5 {
     padding: 1.25rem .75rem;
 }
 
@@ -93,15 +98,19 @@ td>a {
 }
 
 /* 파일 디테일 창이 나타날 때만 오버레이 표시 */
-.overlay.show {
+.overlay.show,
+.overlay.showquery {
     display: block;
 }
 
 .delete,
-.update {
+.update,
+.send,
+.close {
     color: #AF9CFB;
     font-weight: 500;
     background: #fff;
     border: 1px solid #AF9CFB;
+    border-radius: 5px;
     margin-left: 6px;
 }
