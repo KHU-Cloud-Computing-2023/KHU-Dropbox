@@ -28,11 +28,11 @@ function GroupDetailsPage({ groupId }) {
 
         // generate fake member data
         const fakeMembersData = [
-          { id: 1, name: 'Page Clement' },
-          { id: 2, name: 'Christ' },
-          { id: 3, name: 'Arnold' },
-          { id: 4, name: 'Samuel ' },
-          { id: 5, name: 'Pearson' },
+          { id: 1, name: 'Samue1' },
+          { id: 2, name: 'wow123' },
+          { id: 3, name: 'gyeongje' },
+          { id: 4, name: 'oh1234 ' },
+          { id: 5, name: 'gyulim01' },
         ];
         setMembers(fakeMembersData);
       } catch (error) {
